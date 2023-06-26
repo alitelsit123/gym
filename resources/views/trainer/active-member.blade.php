@@ -2,132 +2,67 @@
 
 @section('body')
 @php
-$packets = \App\Models\Packet::get();
+$packets = \App\Models\Packet::all();
 @endphp
-<div class="card">
-  <div class="card-body">
-    <div class="d-flex align-items-center justify-content-between">
-      <h4>Manage Paket Saya</h4>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-2">
-        Tambah Paket
-      </button>
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Buat Paket</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{url('trainer/packet/store')}}" method="post" enctype="multipart/form-data">
-                  <div class="modal-body">
-                    <div class="form-group mb-3">
-                      <label class="form-label" for="">Judul Paket</label>
-                      <input type="text" id="" name="title" class="form-control" placeholder="Nama Paket">
-                    </div>
-                    <div class="form-group mb-3">
-                      <label class="form-label" for="">Gambar</label>
-                      <input type="file" id="" name="image" class="form-control" accept="image/*" placeholder="Nama Paket">
-                    </div>
-                    <div class="form-group mb-3">
-                      <label class="form-label" for="">Keterangan</label>
-                      <textarea name="description" id="" rows="3" class="form-control w-100"></textarea>
-                    </div>
-                    <div class="form-group mb-3">
-                      <label class="form-label" for="">Harga paket</label>
-                      <input type="number" id="" name="price" class="form-control" placeholder="">
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Simpan</button>
-                  </div>
-                </form>
-            </div>
-        </div>
+<div class="container-fluid">
+  <!-- javascript behavior vertical pills -->
+  <div class="row">
+    <div class="col-3">
+      <div class="mb-2">
+        <strong>PAKET SAYA</strong>
+      </div>
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        @foreach ($packets as $k => $row)
+        <a class="nav-link @if($k == 0) active @endif" id="v-pills-home-{{$row->id}}-tab" data-bs-toggle="pill" href="#v-pills-home-{{$row->id}}" role="tab" aria-controls="v-pills-home-{{$row->id}}" aria-selected="true">{{$row->title}}</a>
+        @endforeach
       </div>
     </div>
-    <!-- basic table -->
-    <table class="table table-stripped mt-2">
-      <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nama Paket</th>
-            <th scope="col">Harga</th>
-            <th scope="col">Gambar</th>
-            <th scope="col">Keterangan</th>
-            <th scope="col">#</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="col-9">
+
+      <div class="tab-content" id="v-pills-tabContent">
         @foreach ($packets as $k => $row)
-        <tr>
-          <th scope="row">{{$row->code}}</th>
-          <td>
-            <div>{{$row->title}}</div>
-          </td>
-          <td>Rp. {{number_format($row->price)}}</td>
-          <td>
-            <img src="{{asset('storage/packet/'.$row->image)}}" alt="" srcset="" style="width:70px;height:auto;" />
-          </td>
-          <td>{{$row->description}}</td>
-          <td>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalu-{{$row->id}}">
-              Update
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalu-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Update Paket</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
+        <div class="tab-pane fade @if($k == 0) show active @endif" id="v-pills-home-{{$row->id}}" role="tabpanel" aria-labelledby="v-pills-home-{{$row->id}}-tab">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-stripped">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Sisa</th>
+                    <th>Nutrisi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @php
+                  $members = \App\Models\TrainerMember::wherePacket_id($row->id)->whereStatus('approve')->get();
+                  @endphp
+                  @foreach ($members as $row)
+                  <tr>
+                    <td>{{$row->member->name}}</td>
+                    <td>{{\Carbon\Carbon::parse($row->start_date ?? date('Y-m-d'))->addDays($row->duration)->diffInDays()}} Hari</td>
+                    <td>
+                      <!-- labels -->
+                      <div class="progress mb-1">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                       </div>
-                      <form action="{{url('trainer/packet/update/'.$row->id)}}" method="post" enctype="multipart/form-data">
-                        <div class="modal-body">
-                          <div class="form-group mb-3">
-                            <label class="form-label" for="">Judul Paket</label>
-                            <input type="text" id="" name="title" value="{{$row->title}}" class="form-control" placeholder="Nama Paket">
-                          </div>
-                          <div class="form-group mb-3">
-                            <label class="form-label" for="">Gambar</label>
-                            <input type="file" id="" name="image" class="form-control" accept="image/*" placeholder="">
-                            <small>Kosongkan jika tidak update gambar.</small>
-                          </div>
-                          <div class="form-group mb-3">
-                            <label class="form-label" for="">Keterangan</label>
-                            <textarea name="description" id="" rows="3" class="form-control w-100">{{$row->description}}</textarea>
-                          </div>
-                          <div class="form-group mb-3">
-                            <label class="form-label" for="">Harga paket</label>
-                            <input type="number" id="" name="price" class="form-control" placeholder="" value="{{$row->price}}">
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                      </form>
-                  </div>
-              </div>
+                      <button class="btn btn-sm btn-primary mb-2">Lihat Jadwal Nutrisi</button>
+                      <hr />
+                      <!-- labels -->
+                      <div class="progress mb-1">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                      </div>
+                      <button class="btn btn-sm btn-primary">Lihat Jadwal Latihan</button>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
             </div>
           </div>
-          <!-- Button trigger modal -->
-          <a href="{{url('admin/membership/destroy')}}?id={{$row->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus ?');">
-            Hapus
-          </a>
-          </td>
-        </tr>
+        </div>
         @endforeach
-      </tbody>
-    </table>
-    <!-- basic table -->
+      </div>
+    </div>
   </div>
 </div>
 @endsection

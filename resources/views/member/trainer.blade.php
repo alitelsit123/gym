@@ -41,7 +41,46 @@ $packets = \App\Models\Packet::whereHas('trainer', function($query) {
                 <strong>Rp. {{number_format($row->price)}},-</strong>
               </div>
               <div class="col-6">
-                <button class="btn btn-success w-100">Langganan</button>
+                <form class="card" action="{{url('member/trainer/store_payment')}}" enctype="multipart/form-data" method="post">
+                  <input type="hidden" name="packet_id" value="{{$row->id}}" />
+                  @php
+                  $existingTrainerMemberPending = \App\Models\TrainerMember::whereMember_id(auth()->user()->id)->wherePacket_id($row->id)->whereStatus('pending')->first();
+                  $existingTrainerMemberApprove = \App\Models\TrainerMember::whereMember_id(auth()->user()->id)->wherePacket_id($row->id)->whereStatus('approve')->first();
+                  @endphp
+                  @if ($existingTrainerMemberPending || $existingTrainerMemberApprove)
+                  <button type="button" class="btn btn-secondary w-100 hover:bg-secondary" disabled>Anda sudah berlangganan</button>
+                  @else
+                  <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}">Langganan</button>
+                  @endif
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                              <div class="alert alert-info">
+                                <strong>Perhatian!</strong><br />
+                                <p>
+                                  <strong>Transfer ke rekening xxx-xxx-xxx lalu upload bukti ke sini.</strong>
+                                </p>
+                              </div>
+                              <div class="form-group mb-3">
+                                <label for="" class="mb-1">Bukti Transfer</label>
+                                <input type="file" name="payment_eot" id="" class="form-control" required />
+                              </div>
+                              <div class="form-group mb-3">
+                                <label for="" class="mb-1">Tanggal Mulai</label>
+                                <input type="date" name="start_date" id="" class="form-control" required />
+                              </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

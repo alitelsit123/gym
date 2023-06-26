@@ -23,6 +23,9 @@ Route::get('/', function () {
     case 'trainer':
       return redirect('trainer');
       break;
+    case 'akuntan':
+      return redirect('akuntan');
+      break;
     default:
       return redirect('member');
       break;
@@ -85,11 +88,27 @@ Route::prefix('admin')->middleware('auth.role')->group(function() {
 
 });
 
+Route::prefix('akuntan')->middleware('auth.role')->group(function() {
+  Route::get('/', [App\Http\Controllers\Akuntan\TransactionController::class, 'index']);
+  Route::get('/approved_payment', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPayment']);
+  Route::get('/approved_payment_packet', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentPacket']);
+});
+
 Route::prefix('member')->middleware('auth.role')->group(function() {
   Route::get('/', [App\Http\Controllers\Member\DashboardController::class, 'index']);
 
   Route::prefix('trainer')->group(function() {
     Route::get('/', [App\Http\Controllers\Member\TrainerController::class, 'index']);
+    Route::post('/store_payment', [App\Http\Controllers\Member\TrainerController::class, 'storePayment']);
+  });
+
+  Route::prefix('membership')->group(function() {
+    Route::get('/', [App\Http\Controllers\Member\MembershipController::class, 'index']);
+    Route::post('/store_payment', [App\Http\Controllers\Member\MembershipController::class, 'storePayment']);
+  });
+
+  Route::prefix('history')->group(function() {
+    Route::get('/', [App\Http\Controllers\Member\HistoryController::class, 'index']);
   });
 
 });

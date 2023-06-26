@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class TrainerMember extends Model
 {
     use HasFactory;
+    protected $fillable = [
+      'duration', 'payment_date','payment_eot','payment_approved','status','member_id','packet_id','trainer_id','start_date'
+    ];
+    public function packet() {
+      return $this->belongsTo('App\Models\Packet', 'packet_id');
+    }
+    public function member() {
+      return $this->belongsTo('App\Models\User', 'member_id');
+    }
 }

@@ -9,7 +9,7 @@
           <!-- Page header -->
           <div class="d-flex justify-content-between align-items-center mb-5">
             <div class="mb-2 mb-lg-0">
-              <h3 class="mb-0  text-white">Projects</h3>
+              <h3 class="mb-0  text-white">Gym's Dashboard</h3>
             </div>
             <div>
               {{-- <a href="#!" class="btn btn-white">Create New Project</a> --}}
@@ -26,7 +26,7 @@
               <!-- heading -->
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                  <h4 class="mb-0">Projects</h4>
+                  <h4 class="mb-0">Akun</h4>
                 </div>
                 <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -40,8 +40,11 @@
               </div>
               <!-- project number -->
               <div class="lh-1">
-                <h1 class=" mb-1 fw-bold">18</h1>
-                <p class="mb-0"><span class="text-dark me-2">2</span>Completed</p>
+                @php
+                $account = \App\Models\User::count();
+                @endphp
+                <h1 class=" mb-1 fw-bold">{{$account}}</h1>
+                {{-- <p class="mb-0"><span class="text-dark me-2">{{$account}}</span></p> --}}
               </div>
             </div>
           </div>
@@ -55,7 +58,7 @@
               <div class="d-flex justify-content-between align-items-center
       mb-3">
                 <div>
-                  <h4 class="mb-0">Active Task</h4>
+                  <h4 class="mb-0">Trainer</h4>
                 </div>
                 <div class="icon-shape icon-md bg-primary-soft text-primary
         rounded-2">
@@ -73,70 +76,10 @@
               </div>
               <!-- project number -->
               <div class="lh-1">
-                <h1 class="  mb-1 fw-bold">132</h1>
-                <p class="mb-0"><span class="text-dark me-2">28</span>Completed</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
-          <!-- card -->
-          <div class="card h-100 card-lift">
-            <!-- card body -->
-            <div class="card-body">
-              <!-- heading -->
-              <div class="d-flex justify-content-between align-items-center
-      mb-3">
-                <div>
-                  <h4 class="mb-0">Teams</h4>
-                </div>
-                <div class="icon-shape icon-md bg-primary-soft text-primary
-        rounded-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-users">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg>
-                </div>
-              </div>
-              <!-- project number -->
-              <div class="lh-1">
-                <h1 class="  mb-1 fw-bold">12</h1>
-                <p class="mb-0"><span class="text-dark me-2">1</span>Completed</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
-          <!-- card -->
-          <div class="card h-100 card-lift">
-            <!-- card body -->
-            <div class="card-body">
-              <!-- heading -->
-              <div class="d-flex justify-content-between align-items-center
-      mb-3">
-                <div>
-                  <h4 class="mb-0">Productivity</h4>
-                </div>
-                <div class="icon-shape icon-md bg-primary-soft text-primary
-        rounded-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-target">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <circle cx="12" cy="12" r="6"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                  </svg>
-                </div>
-              </div>
-              <!-- project number -->
-              <div class="lh-1">
-                <h1 class="  mb-1 fw-bold">76%</h1>
-                <p class="mb-0"><span class="text-success me-2">5%</span>Completed</p>
+                @php
+                $account = \App\Models\User::whereRole('trainer')->count();
+                @endphp
+                <h1 class="  mb-1 fw-bold">{{$account}}</h1>
               </div>
             </div>
           </div>

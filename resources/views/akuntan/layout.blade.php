@@ -79,26 +79,8 @@
         <ul class="navbar-nav flex-column" id="sideNavbar">
 
           <li class="nav-item">
-            <a class="nav-link has-arrow " href="{{url('member')}}">
-              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Dashboard
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link has-arrow " href="{{url('member/trainer')}}">
-              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Ambil Paket
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link has-arrow " href="{{url('member/membership')}}">
-              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Membership
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link has-arrow " href="{{url('member/history')}}">
-              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Riwayat
+            <a class="nav-link has-arrow " href="{{url('akuntan')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Transaksi Pending
             </a>
           </li>
 

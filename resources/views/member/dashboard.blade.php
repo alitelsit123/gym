@@ -3,6 +3,12 @@
 @section('body')
   <div class="app-content-area">
     <div class="mx-n4"></div>
+      @php
+      $existingMembershipPending = \App\Models\Membership::whereUser_id(auth()->user()->id)->whereStatus('pending')->first();
+      @endphp
+      @if ($existingMembershipPending)
+      <div class="alert alert-warning">Kamu ada pembayaran yg belum dibayar, dilunasi segera agar dicek oleh admin!</div>
+      @endif
       <div class="bg-primary rounded-3">
         <div class="row mb-5 ">
           <div class="col-lg-12 col-md-12 col-12">
@@ -11,7 +17,7 @@
                 <img src="../assets/images/avatar/avatar-3.jpg" alt="Image" class="rounded-circle avatar avatar-xl">
                 <div class="ms-md-4 mt-3 mt-md-0 lh-1">
                   <h3 class="text-white mb-0">Hallo, {{auth()->user()->name}}</h3>
-                  <small class="text-white"> Here is what’s happening with your projects today:</small>
+                  <small class="text-white">Selamat Pagi</small>
                 </div>
               </div>
               <div class="d-none d-lg-block">
