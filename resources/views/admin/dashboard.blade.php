@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-12 mb-5">
           <!-- card -->
           <div class="card h-100 card-lift">
             <!-- card body -->
@@ -58,7 +58,7 @@
               <div class="d-flex justify-content-between align-items-center
       mb-3">
                 <div>
-                  <h4 class="mb-0">Trainer</h4>
+                  <h4 class="mb-0">Transaksi Berhasil</h4>
                 </div>
                 <div class="icon-shape icon-md bg-primary-soft text-primary
         rounded-2">
@@ -77,9 +77,18 @@
               <!-- project number -->
               <div class="lh-1">
                 @php
-                $account = \App\Models\User::whereRole('trainer')->count();
+                $packets = \App\Models\TrainerMember::whereStatus('approve')->get();
+                $totalPacket = 0;
+                foreach ($packets as $row) {
+                  $totalPacket += $row->packet->price;
+                }
+                $totalMembership = 0;
+                $memberships = \App\Models\Membership::whereStatus('approve')->get();
+                foreach ($memberships as $row) {
+                  $totalMembership += $row->type->{'price_'.$row->duration_type};
+                }
                 @endphp
-                <h1 class="  mb-1 fw-bold">{{$account}}</h1>
+                <h1 class="  mb-1 fw-bold">Rp. <span>{{number_format($totalPacket+$totalMembership)}}</span></h1>
               </div>
             </div>
           </div>

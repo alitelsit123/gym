@@ -7,8 +7,8 @@ $users = \App\Models\User::whereRole('member')->get();
     <tr>
         <th scope="col">#</th>
         <th scope="col">Nama</th>
+        <th scope="col">Nomor HP</th>
         <th scope="col">Photo</th>
-        <th>Membership</th>
         <th scope="col">Alamat</th>
         <th scope="col">#</th>
     </tr>
@@ -22,14 +22,8 @@ $users = \App\Models\User::whereRole('member')->get();
         <div class="badge bg-secondary">{{$row->email}}</div><br />
         <div class="badge bg-info">{{$row->role}}</div>
       </td>
-      <td></td>
+      <td>{{$row->phone}}</td>
       <td>
-        <select name="s{{$row->id}}" id="" class="form-control">
-          <option value="">Belum punya membership</option>
-          @foreach (\App\Models\MembershipType::all() as $rowMembership)
-          <option value="{{$rowMembership->id}}" @if($rowMembership->id == $row->membership_type_id) selected @endif>{{ucfirst($rowMembership->name)}}</option>
-          @endforeach
-        </select>
         <script>
           $(document).ready(function() {
             $('select[name="s{{$row->id}}"]').change(function() {

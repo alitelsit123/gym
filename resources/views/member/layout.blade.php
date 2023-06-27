@@ -124,18 +124,18 @@
           <div class="ms-lg-3 d-none d-md-none d-lg-block">
             <!-- Form -->
             <form class="d-flex align-items-center">
-              <input type="search" class="form-control" placeholder="Search" />
+              {{-- <input type="search" class="form-control" placeholder="Search" /> --}}
             </form>
           </div>
           <!--Navbar nav -->
           <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
             <li class="dropdown stopevent">
-              <a class="btn btn-light btn-icon rounded-circle indicator
+              {{-- <a class="btn btn-light btn-icon rounded-circle indicator
           indicator-primary text-muted"
                 href="#" role="button" id="dropdownNotification" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="icon-xs" data-feather="bell"></i>
-              </a>
+              </a> --}}
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end" aria-labelledby="dropdownNotification">
                 <div>
                   <div

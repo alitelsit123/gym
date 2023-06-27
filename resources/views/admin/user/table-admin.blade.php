@@ -7,6 +7,7 @@ $users = \App\Models\User::whereRole('admin')->where('email', '<>', auth()->user
     <tr>
         <th scope="col">#</th>
         <th scope="col">Nama</th>
+        <th scope="col">Nomor HP</th>
         <th scope="col">Photo</th>
         {{-- <th>Membership</th> --}}
         <th scope="col">Alamat</th>
@@ -22,6 +23,7 @@ $users = \App\Models\User::whereRole('admin')->where('email', '<>', auth()->user
         <div class="badge bg-secondary">{{$row->email}}</div><br />
         <div class="badge bg-info">{{$row->role}}</div>
       </td>
+      <td>{{$row->phone}}</td>
       <td></td>
       {{-- <td>
         <select name="s{{$row->id}}" id="" class="form-control">
