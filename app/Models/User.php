@@ -54,4 +54,10 @@ class User extends Authenticatable
     public function specialists() {
       return $this->hasMany('App\Models\TrainerSpecialis', 'user_id');
     }
+    public function trainerMembers() {
+      return $this->hasMany('App\Models\TrainerMember', 'trainer_id');
+    }
+    public function trainerPackets() {
+      return $this->hasMany('App\Models\Packet', 'trainer_id');
+    }
 }

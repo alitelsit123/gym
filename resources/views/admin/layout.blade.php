@@ -285,6 +285,12 @@
             </a>
           </li> --}}
           <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('admin/transaction')}}">
+              <i data-feather="git-pull-request" class="nav-icon icon-xs me-2">
+              </i> Transaksi
+            </a>
+          </li>
+          <li class="nav-item">
             <form action="{{url('logout')}}" method="post" id="logout"></form>
             <a class="nav-link has-arrow " href="#" onclick="$('#logout').submit()">
               <i data-feather="git-pull-request" class="nav-icon icon-xs me-2">

@@ -96,6 +96,10 @@ Route::prefix('admin')->middleware('auth.role')->group(function() {
     Route::post('update/{id}',[App\Http\Controllers\Admin\UserController::class, 'update']);
   });
 
+  Route::prefix('transaction')->group(function() {
+    Route::get('/',[App\Http\Controllers\Admin\TransactionController::class, 'index']);
+  });
+
 });
 
 Route::prefix('akuntan')->middleware('auth.role')->group(function() {

@@ -26,7 +26,7 @@
               <!-- heading -->
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                  <h4 class="mb-0">Member Aktif</h4>
+                  <h4 class="mb-0">Member</h4>
                 </div>
                 <div class="icon-shape icon-md bg-primary-soft text-primary rounded-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -40,8 +40,8 @@
               </div>
               <!-- project number -->
               <div class="lh-1">
-                <h1 class=" mb-1 fw-bold">18</h1>
-                <p class="mb-0"><span class="text-dark me-2">2</span>Aktif</p>
+                <h1 class=" mb-1 fw-bold">{{auth()->user()->trainerMembers()->count()}}</h1>
+                <p class="mb-0"><span class="text-dark me-2">{{auth()->user()->trainerMembers()->whereStatus('approve')->count()}}</span>Aktif</p>
               </div>
             </div>
           </div>
@@ -73,8 +73,7 @@
               </div>
               <!-- project number -->
               <div class="lh-1">
-                <h1 class="  mb-1 fw-bold">132</h1>
-                <p class="mb-0"><span class="text-dark me-2">28</span>Aktif</p>
+                <h1 class="  mb-1 fw-bold">{{auth()->user()->trainerPackets()->count()}}</h1>
               </div>
             </div>
           </div>
