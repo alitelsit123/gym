@@ -123,6 +123,7 @@
             <!-- Form -->
             <form class="d-flex align-items-center">
               {{-- <input type="search" class="form-control" placeholder="Search" /> --}}
+              <strong>{{ucfirst(request()->segment(2) ?? 'Dashboard')}}</strong>
             </form>
           </div>
           <!--Navbar nav -->
