@@ -402,7 +402,7 @@
               <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-md avatar-indicators avatar-online">
-                  <img alt="avatar" src="../assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                  <img alt="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="rounded-circle" />
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">

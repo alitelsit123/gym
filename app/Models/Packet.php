@@ -16,4 +16,10 @@ class Packet extends Model
     public function trainer() {
       return $this->belongsTo('App\Models\User', 'trainer_id');
     }
+    public function members() {
+      return $this->belongsToMany('App\Models\User', 'trainer_members', 'packet_id', 'user_id')->withTimestamps()->withPivot(['duration', 'payment_date','payment_eot','payment_approved','status','start_date']);
+    }
+    public function trainerMembers() {
+      return $this->hasMany('App\Models\TrainerMember', 'packet_id');
+    }
 }

@@ -50,6 +50,16 @@ Route::prefix('trainer')->middleware('auth.role')->group(function() {
 
   Route::prefix('member')->group(function() {
     Route::get('/',[App\Http\Controllers\Trainer\MemberController::class, 'index']);
+
+    Route::get('/schedule-nutrition/{id}',[App\Http\Controllers\Trainer\MemberController::class, 'scheduleNutrition']);
+    Route::post('/store_nutrition',[App\Http\Controllers\Trainer\MemberController::class, 'storeNutrition']);
+    Route::post('/update_nutrition',[App\Http\Controllers\Trainer\MemberController::class, 'updateNutrition']);
+    Route::get('/destroy_nutrition',[App\Http\Controllers\Trainer\MemberController::class, 'destroyNutrition']);
+
+    Route::get('/schedule-exercise/{id}',[App\Http\Controllers\Trainer\MemberController::class, 'scheduleExercise']);
+    Route::post('/store_exercise',[App\Http\Controllers\Trainer\MemberController::class, 'storeexercise']);
+    Route::post('/update_exercise',[App\Http\Controllers\Trainer\MemberController::class, 'updateexercise']);
+    Route::get('/destroy_exercise',[App\Http\Controllers\Trainer\MemberController::class, 'destroyexercise']);
   });
 
   Route::prefix('specialist')->group(function() {
@@ -96,7 +106,7 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
 
 Route::prefix('member')->middleware('auth.role')->group(function() {
   Route::get('/', [App\Http\Controllers\Member\DashboardController::class, 'index']);
-
+  Route::post('/absent_exercise',[App\Http\Controllers\Trainer\MemberController::class, 'absentExercise']);
   Route::prefix('trainer')->group(function() {
     Route::get('/', [App\Http\Controllers\Member\TrainerController::class, 'index']);
     Route::post('/store_payment', [App\Http\Controllers\Member\TrainerController::class, 'storePayment']);
