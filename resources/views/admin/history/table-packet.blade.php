@@ -1,5 +1,5 @@
 @php
-$memberships = \App\Models\TrainerMember::latest()->get();
+$memberships = \App\Models\TrainerMember::has('packet')->latest()->get();
 @endphp
 <!-- basic table -->
 <table class="table table-stripped mt-2">

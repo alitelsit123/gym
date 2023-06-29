@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MembershipType extends Model
+class Product extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-      'name','price_daily','price_weekly','price_monthly','description','class'
+      'name','image','description','price','status','category'
     ];
 }

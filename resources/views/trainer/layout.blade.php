@@ -88,7 +88,11 @@
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Anggota Aktif
             </a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('trainer/product')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Toko
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link has-arrow " href="{{url('trainer/packet')}}">
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Manajemen Paket

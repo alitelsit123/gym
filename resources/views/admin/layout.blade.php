@@ -84,9 +84,21 @@
             </a>
           </li>
 
+          {{-- <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('admin/class')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Kelas
+            </a>
+          </li> --}}
+
           <li class="nav-item">
             <a class="nav-link has-arrow " href="{{url('admin/membership')}}">
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Membership
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('admin/product')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Toko
             </a>
           </li>
 

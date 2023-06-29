@@ -1,5 +1,5 @@
 @php
-$memberships = \App\Models\Membership::whereUser_id(auth()->user()->id)->latest()->get();
+$memberships = \App\Models\Membership::has('type')->whereUser_id(auth()->user()->id)->latest()->get();
 @endphp
 <!-- basic table -->
 <table class="table table-stripped mt-2">

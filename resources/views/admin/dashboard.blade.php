@@ -77,13 +77,13 @@
               <!-- project number -->
               <div class="lh-1">
                 @php
-                $packets = \App\Models\TrainerMember::whereStatus('approve')->get();
+                $packets = \App\Models\TrainerMember::has('packet')->whereStatus('approve')->get();
                 $totalPacket = 0;
                 foreach ($packets as $row) {
                   $totalPacket += $row->packet->price;
                 }
                 $totalMembership = 0;
-                $memberships = \App\Models\Membership::whereStatus('approve')->get();
+                $memberships = \App\Models\Membership::has('type')->whereStatus('approve')->get();
                 foreach ($memberships as $row) {
                   $totalMembership += $row->type->{'price_'.$row->duration_type};
                 }

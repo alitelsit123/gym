@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Membership;
 use App\Models\TrainerMember;
+use App\Models\Order;
 
 class TransactionController extends Controller
 {
@@ -24,6 +25,13 @@ class TransactionController extends Controller
     $membership = TrainerMember::findOrFail(request('id'));
     $membership->status = 'approve';
     $membership->payment_approved = now();
+    $membership->save();
+    return back()->with(['success' => 'Transaksi telah diterima.']);
+  }
+  public function approvedPaymentProduct() {
+    $membership = Order::findOrFail(request('id'));
+    $membership->status = 'approve';
+    $membership->payment_date = now();
     $membership->save();
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }

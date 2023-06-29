@@ -6,7 +6,7 @@ $memberships = \App\Models\MembershipType::get();
 @endphp
 <div class="app-content-area">
   <div class="container-fluid">
-    <h4 class="mb-3">Sewa Tempat</h4>
+    <h4 class="mb-3">Sewa Membership</h4>
     <div class="row">
       @foreach ($memberships as $row)
       <div class="col-md-6">
@@ -14,6 +14,7 @@ $memberships = \App\Models\MembershipType::get();
           <input type="hidden" name="type_id" value="{{$row->id}}" />
           <div class="card-body">
             <h4 class="font-weight-bold">{{$row->name}}</h4>
+            <h4 class="badge bg-info">{{$row->class}}</h4>
             <p>{{Str::limit($row->description,35,'...')}}</p>
             <!-- Checkbox and radio -->
             <ul class="list-group">

@@ -5,15 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MembershipType;
+use App\Models\MembershipClass;
 
-class MembershipController extends Controller
+class MembershipClassController extends Controller
 {
   public function index() {
-    return view('admin.membership');
-  }
-  public function subscribers() {
-    return view('admin.membership-subscribers');
+    return view('admin.class');
   }
 
   public function create()
@@ -25,18 +22,13 @@ class MembershipController extends Controller
   {
       $validatedData = $request->validate([
           'name' => 'required',
-          'price_daily' => 'required|numeric',
-          'price_weekly' => 'required|numeric',
-          'price_monthly' => 'required|numeric',
-          'description' => 'nullable',
-          'class' => 'required',
       ]);
 
-      MembershipType::create($validatedData);
+      MembershipClass::create($validatedData);
       return redirect()->back()->with('success', 'Berhasil.');
   }
 
-  public function edit(MembershipType $membershipType)
+  public function edit(MembershipClass $membershipType)
   {
       return view('membership_types.edit', compact('membershipType'));
   }
@@ -45,22 +37,17 @@ class MembershipController extends Controller
   {
       $validatedData = $request->validate([
           'name' => 'required',
-          'price_daily' => 'required|numeric',
-          'price_weekly' => 'required|numeric',
-          'price_monthly' => 'required|numeric',
-          'description' => 'nullable',
-          'class' => 'required',
       ]);
       // dd($validatedData);
-      $membershipTypes = MembershipType::findOrFail($id);
-      MembershipType::whereId($id)->update($validatedData);
+      $membershipTypes = MembershipClass::findOrFail($id);
+      MembershipClass::whereId($id)->update($validatedData);
       return redirect()->back()->with('success', 'Berhasil update.');
   }
 
   public function destroy()
   {
     $id = request('id');
-    $membershipType = MembershipType::findOrFail($id);
+    $membershipType = MembershipClass::findOrFail($id);
     $membershipType->delete();
     return redirect()->back()->with('success', 'Berhasil.');
   }

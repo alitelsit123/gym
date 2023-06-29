@@ -1,5 +1,5 @@
 @php
-$memberships = \App\Models\Membership::latest()->get();
+$memberships = \App\Models\Membership::has('type')->latest()->get();
 @endphp
 <!-- basic table -->
 <table class="table table-stripped mt-2">

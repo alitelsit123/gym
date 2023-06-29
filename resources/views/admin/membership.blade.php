@@ -29,6 +29,10 @@ $memberships = \App\Models\MembershipType::get();
                       <input type="text" id="" name="name" class="form-control" placeholder="Nama Tipe">
                     </div>
                     <div class="form-group mb-3">
+                      <label class="form-label" for="">Kelas</label>
+                      <input type="text" id="" name="class" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group mb-3">
                       <label class="form-label" for="">Harga Harian</label>
                       <input type="number" id="" name="price_daily" class="form-control" placeholder="">
                     </div>
@@ -60,6 +64,7 @@ $memberships = \App\Models\MembershipType::get();
         <tr>
             <th scope="col">#</th>
             <th scope="col">Jenis Member</th>
+            <th scope="col">Kelas</th>
             <th scope="col">Harga</th>
             <th scope="col">Keterangan</th>
             <th scope="col">#</th>
@@ -70,6 +75,7 @@ $memberships = \App\Models\MembershipType::get();
         <tr>
           <th scope="row">{{$k+1}}</th>
           <td>{{$row->name}}</td>
+          <td>{{$row->class}}</td>
           <td>
             <div class="badge bg-info">Rp. {{number_format($row->price_daily)}} / Hari</div><br />
             <div class="badge bg-info">Rp. {{number_format($row->price_weekly)}} / Minggu</div><br />
@@ -77,6 +83,7 @@ $memberships = \App\Models\MembershipType::get();
           </td>
           <td>{{$row->description}}</td>
           <td>
+            <a href="{{url('admin/membership/subscribers'.'?id='.$row->id)}}" class="btn btn-sm btn-primary text-white btn-block mb-2" style="display: block;">Lihat Subscriber</a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalu-{{$row->id}}">
               Update
@@ -96,6 +103,10 @@ $memberships = \App\Models\MembershipType::get();
                           <div class="form-group mb-3">
                             <label class="form-label" for="">Tipe</label>
                             <input type="text" id="" name="name" class="form-control" value="{{$row->name}}" placeholder="Nama Tipe">
+                          </div>
+                          <div class="form-group mb-3">
+                            <label class="form-label" for="">Kelas</label>
+                            <input type="text" id="" name="class" class="form-control" placeholder="">
                           </div>
                           <div class="form-group mb-3">
                             <label class="form-label" for="">Harga Harian</label>

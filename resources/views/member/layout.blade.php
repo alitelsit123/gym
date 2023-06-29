@@ -95,7 +95,11 @@
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Membership
             </a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('member/product')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Toko
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link has-arrow " href="{{url('member/history')}}">
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Riwayat

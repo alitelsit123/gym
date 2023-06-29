@@ -29,6 +29,45 @@
         </div>
       </div>
       <div>
+        <h4 class="mb-3">Membership</h4>
+        @php
+        $userMemberships = auth()->user()->memberships()->has('type')->whereStatus('approve')->get();
+        @endphp
+        <div class="row mb-4">
+          @foreach ($userMemberships as $row)
+          <div class="col-md-4">
+            <div class="card bg-primary card-outlined">
+              <div class="card-body">
+                <h4 class="btn-block font-weight-bold text-white"><strong>{{$row->type->name}}</strong> {{$row->type->class}}</h4>
+                @php
+                $duration = null;
+                if ($row->durationTypeLocal() == 'harian') {
+                  $duration = \Carbon\Carbon::parse($row->start_date)->addDays($row->duration);
+                } else if($row->durationTypeLocal() == 'minggu') {
+                  $duration = \Carbon\Carbon::parse($row->start_date)->addWeeks($row->duration);
+                } else {
+                  $duration = \Carbon\Carbon::parse($row->start_date)->addMonths($row->duration);
+                }
+                if ($duration->format('Y-m-d-H-i-s') < \Carbon\Carbon::now()->format('Y-m-d-H-i-s')) {
+                  $row->status = 'expired';
+                  $row->save();
+                }
+                @endphp
+                <small class="d-block text-white" style="font-style: italic;">*Berakhir {{$duration->locale('id')->diffForHumans()}}</small>
+              </div>
+            </div>
+          </div>
+          @endforeach
+          @if ($userMemberships->count() == 0)
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                Belum langganan membership
+              </div>
+            </div>
+          </div>
+          @endif
+        </div>
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
         $nutritions = \App\Models\ScheduleNutrition::whereUser_id(auth()->id())->where('daym',$currentDay)->get();

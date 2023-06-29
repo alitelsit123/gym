@@ -1,5 +1,5 @@
 @php
-$packets = \App\Models\TrainerMember::whereMember_id(auth()->user()->id)->latest()->get();
+$packets = \App\Models\TrainerMember::has('packet')->whereMember_id(auth()->user()->id)->latest()->get();
 @endphp
 <!-- basic table -->
 <table class="table table-stripped mt-2">

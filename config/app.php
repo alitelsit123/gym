@@ -185,4 +185,9 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'norek' => [
+      'bni' => '039284872',
+      'bri' => '893402934',
+    ]
+
 ];

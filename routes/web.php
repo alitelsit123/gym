@@ -76,6 +76,14 @@ Route::prefix('trainer')->middleware('auth.role')->group(function() {
     Route::get('destroy',[App\Http\Controllers\Trainer\PacketController::class, 'destroy']);
   });
 
+  Route::prefix('product')->group(function() {
+    Route::get('/', [App\Http\Controllers\Trainer\ProductController::class, 'index']);
+    Route::post('/add_cart/{id}', [App\Http\Controllers\Trainer\ProductController::class, 'addCart']);
+    Route::post('/update_cart', [App\Http\Controllers\Trainer\ProductController::class, 'updateCart']);
+    Route::get('/delete_cart/{id}', [App\Http\Controllers\Trainer\ProductController::class, 'deleteCart']);
+    Route::post('pay', [App\Http\Controllers\Trainer\ProductController::class, 'pay']);
+  });
+
 });
 
 Route::prefix('admin')->middleware('auth.role')->group(function() {
@@ -84,9 +92,18 @@ Route::prefix('admin')->middleware('auth.role')->group(function() {
 
   Route::prefix('membership')->group(function() {
     Route::get('/',[App\Http\Controllers\Admin\MembershipController::class, 'index']);
+    Route::get('subscribers',[App\Http\Controllers\Admin\MembershipController::class, 'subscribers']);
+    Route::get('expired_membership',[App\Http\Controllers\Admin\MembershipController::class, 'expiredMembership']);
     Route::post('store',[App\Http\Controllers\Admin\MembershipController::class, 'store']);
     Route::get('destroy',[App\Http\Controllers\Admin\MembershipController::class, 'destroy']);
     Route::post('update/{id}',[App\Http\Controllers\Admin\MembershipController::class, 'update']);
+  });
+
+  Route::prefix('product')->group(function() {
+    Route::get('/',[App\Http\Controllers\Admin\ProductController::class, 'index']);
+    Route::post('store',[App\Http\Controllers\Admin\ProductController::class, 'store']);
+    Route::get('destroy',[App\Http\Controllers\Admin\ProductController::class, 'destroy']);
+    Route::post('update/{id}',[App\Http\Controllers\Admin\ProductController::class, 'update']);
   });
 
   Route::prefix('user')->group(function() {
@@ -106,6 +123,7 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
   Route::get('/', [App\Http\Controllers\Akuntan\TransactionController::class, 'index']);
   Route::get('/approved_payment', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPayment']);
   Route::get('/approved_payment_packet', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentPacket']);
+  Route::get('/approved_payment_product', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentProduct']);
 });
 
 Route::prefix('member')->middleware('auth.role')->group(function() {
@@ -119,6 +137,14 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
   Route::prefix('membership')->group(function() {
     Route::get('/', [App\Http\Controllers\Member\MembershipController::class, 'index']);
     Route::post('/store_payment', [App\Http\Controllers\Member\MembershipController::class, 'storePayment']);
+  });
+
+  Route::prefix('product')->group(function() {
+    Route::get('/', [App\Http\Controllers\Member\ProductController::class, 'index']);
+    Route::post('/add_cart/{id}', [App\Http\Controllers\Member\ProductController::class, 'addCart']);
+    Route::post('/update_cart', [App\Http\Controllers\Member\ProductController::class, 'updateCart']);
+    Route::get('/delete_cart/{id}', [App\Http\Controllers\Member\ProductController::class, 'deleteCart']);
+    Route::post('pay', [App\Http\Controllers\Member\ProductController::class, 'pay']);
   });
 
   Route::prefix('history')->group(function() {

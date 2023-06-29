@@ -13,6 +13,9 @@
       <li class="nav-item">
         <a class="nav-link" id="trainer-tab" data-bs-toggle="tab" href="#trainer" role="tab" aria-controls="trainer" aria-selected="false">Membership</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product" role="tab" aria-controls="product" aria-selected="false">Produk</a>
+      </li>
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="member" role="tabpanel" aria-labelledby="member-tab">
@@ -20,6 +23,9 @@
       </div>
       <div class="tab-pane fade" id="trainer" role="tabpanel" aria-labelledby="trainer-tab">
         @include('member.history.table-membership')
+      </div>
+      <div class="tab-pane fade" id="product" role="tabpanel" aria-labelledby="product-tab">
+        @include('member.history.table-product')
       </div>
     </div>
   </div>
