@@ -9,7 +9,7 @@
           <!-- Page header -->
           <div class="d-flex justify-content-between align-items-center mb-5">
             <div class="mb-2 mb-lg-0">
-              <h3 class="mb-0  text-white">Gym's Dashboard</h3>
+              <h3 class="mb-0  text-white">Gym's Admin Dashboard</h3>
             </div>
             <div>
               {{-- <a href="#!" class="btn btn-white">Create New Project</a> --}}
@@ -84,11 +84,11 @@
                 }
                 $totalMembership = 0;
                 $memberships = \App\Models\Membership::has('type')->whereStatus('approve')->get();
-                foreach ($memberships as $row) {
-                  $totalMembership += $row->type->{'price_'.$row->duration_type};
-                }
+
+                $orderTotal = \App\Models\Order::whereStatus('approve')->sum('gross_amount');
                 @endphp
-                <h1 class="  mb-1 fw-bold">Rp. <span>{{number_format($totalPacket+$totalMembership)}}</span></h1>
+                <h1 class="  mb-1 fw-bold">Rp. <span>{{number_format($totalPacket+$totalMembership+$orderTotal)}}</span></h1>
+                <small>*Membership + Paket Trainer + Produk</small>
               </div>
             </div>
           </div>
