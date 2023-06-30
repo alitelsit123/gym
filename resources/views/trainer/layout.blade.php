@@ -43,7 +43,7 @@
   <script src="{{url('/assets/js/theme.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <title>Trainer - Gym Kenangan</title>
+  <title>Trainer - MAHESA GYM & FITNESS</title>
 </head>
 
 <body class="bg-light">
@@ -73,7 +73,7 @@
         <!-- Brand logo -->
         <a class="navbar-brand text-white font-weight-bold" href="{{url('trainer')}}">
           {{-- <img src="../assets/images/brand/logo/logo.svg" alt="" /> --}}
-          Gym Bersama
+          MAHESA GYM & FITNESS
         </a>
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
@@ -101,6 +101,17 @@
           <li class="nav-item">
             <a class="nav-link has-arrow " href="{{url('trainer/specialist')}}">
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Bidang Saya
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('trainer/transaction')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Transaksi
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('trainer/profile')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Profile
             </a>
           </li>
 

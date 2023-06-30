@@ -84,6 +84,17 @@ Route::prefix('trainer')->middleware('auth.role')->group(function() {
     Route::post('pay', [App\Http\Controllers\Trainer\ProductController::class, 'pay']);
   });
 
+  Route::prefix('transaction')->group(function() {
+    Route::get('/',[App\Http\Controllers\Trainer\TransactionController::class, 'index']);
+  });
+
+  Route::prefix('profile')->group(function() {
+    Route::get('/',[App\Http\Controllers\Trainer\ProfileController::class, 'index']);
+    Route::post('update',[App\Http\Controllers\Trainer\ProfileController::class, 'update']);
+  });
+
+  Route::get('/approved_payment_packet', [App\Http\Controllers\Trainer\TransactionController::class, 'approvedPaymentPacket']);
+
 });
 
 Route::prefix('admin')->middleware('auth.role')->group(function() {

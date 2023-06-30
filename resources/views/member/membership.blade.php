@@ -68,21 +68,21 @@ $memberships = \App\Models\MembershipType::get();
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-body">
-                            <div class="alert alert-info eot-body">
+                            <div class="alert alert-info eot-body{{$row->id}}">
                               <strong>Perhatian!</strong><br />
                               <p>
-                                <strong>Transfer ke rekening xxx-xxx-xxx lalu upload bukti ke sini.</strong>
+                                <strong>Transfer ke rekening {{config('app.norek.bni')}} lalu upload bukti ke sini.</strong>
                               </p>
                             </div>
                             <div class="form-group mb-3 ">
                               <label for="" class="mb-1">Tipe Pembayaran</label>
-                              <select name="payment_type" id="" class="form-control" required>
+                              <select name="payment_type" id="" class="form-control select{{$row->id}}" required>
                                 <option value="">-- Pilih Tipe Pembayaran --</option>
                                 <option value="transfer">Transfer</option>
                                 <option value="tunai">Tunai</option>
                               </select>
                             </div>
-                            <div class="form-group mb-3 eot-body" style="display: none;">
+                            <div class="form-group mb-3 eot-body{{$row->id}}" style="display: none;">
                               <label for="" class="mb-1">Bukti Transfer</label>
                               <input type="file" name="payment_eot" id="" class="form-control" />
                             </div>
@@ -118,6 +118,18 @@ $memberships = \App\Models\MembershipType::get();
               } else {
                 $('.typename-{{$row->id}}').text(`Total ${$('input[name="type"]:checked').first().data('tr')}`)
                 $('#exampleModal-{{$row->id}}').modal('show')
+              }
+            })
+          })
+        </script>
+        <script>
+          $(document).ready(function() {
+            $('.select{{$row->id}}').change(function() {
+              console.log('test')
+              if ($(this).val() == 'transfer') {
+                $('.eot-body{{$row->id}}').show()
+              } else {
+                $('.eot-body{{$row->id}}').hide()
               }
             })
           })
