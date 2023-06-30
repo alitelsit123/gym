@@ -7,8 +7,8 @@ $order = \App\Models\Order::whereStatus('cart')->whereUser_id(auth()->id())->fir
 
       <th>Gambar</th>
       <th>Produk</th>
-      <th style="width: 200px;">Jumlah</th>
       <th>Sub Harga</th>
+      <th style="width: 200px;">Jumlah</th>
       <th></th>
     </tr>
   </thead>

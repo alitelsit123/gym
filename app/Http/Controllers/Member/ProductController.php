@@ -48,7 +48,8 @@ class ProductController extends Controller
   }
   public function updateCart() {
     foreach (request('quantity') as $id => $quantity) {
-      OrderDetail::whereId($id)->update(['quantity' => $quantity]);
+      $d = OrderDetail::findOrFail($id);
+      OrderDetail::whereId($id)->update(['quantity' => $quantity,'sub_amount' => $quantity * $d->product->price]);
     }
     return back()->with(['success' => 'Keranjang diupdate.']);
   }
