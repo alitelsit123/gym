@@ -19,9 +19,6 @@ class MembershipController extends Controller
     request()->validate([
       'duration' => ['required']
     ]);
-    request()->validate([
-      'payment_eot' => 'required|image', // Adjust the validation rules as needed
-    ]);
     $type = MembershipType::findOrFail(request('type_id'));
 
     if ($type) {
@@ -57,7 +54,9 @@ class MembershipController extends Controller
       }
 
       if (request()->payment_eot !== null && request()->hasFile('payment_eot')) {
-
+        request()->validate([
+          'payment_eot' => 'required|image', // Adjust the validation rules as needed
+        ]);
         // Retrieve the uploaded file
         $uploadedImage = request()->file('payment_eot');
 
@@ -70,10 +69,11 @@ class MembershipController extends Controller
         // Store the image in the specified disk and directory
         Storage::disk($disk)->putFileAs('/', $uploadedImage, '/eot/'.$imageName);
         $membership->payment_eot = $imageName;
-        $membership->save();
       }
+      $membership->payment_type = request('payment_type');
+      $membership->save();
 
     }
-    return back()->with(['success' => 'Berhasil dikirim, tunggu dicek oleh admin.']);
+    return back()->with(['success' => 'Berhasil dikirim, tunggu di konfirmasi.']);
   }
 }

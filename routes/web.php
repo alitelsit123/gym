@@ -124,6 +124,8 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
   Route::get('/approved_payment', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPayment']);
   Route::get('/approved_payment_packet', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentPacket']);
   Route::get('/approved_payment_product', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentProduct']);
+  Route::get('invoice', [App\Http\Controllers\Akuntan\TransactionController::class, 'invoice']);
+
 });
 
 Route::prefix('member')->middleware('auth.role')->group(function() {

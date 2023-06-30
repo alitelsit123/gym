@@ -60,9 +60,11 @@ class TrainerController extends Controller
       // Store the image in the specified disk and directory
       Storage::disk($disk)->putFileAs('/', $uploadedImage, '/eot/'.$imageName);
       $existingTrainerMemberPending->payment_eot = $imageName;
-      $existingTrainerMemberPending->save();
     }
+    $existingTrainerMemberPending->payment_type = request('payment_type');
 
-    return back()->with(['success' => 'Berhasil dikirim, tunggu dicek oleh admin.']);
+    $existingTrainerMemberPending->save();
+
+    return back()->with(['success' => 'Berhasil dikirim, tunggu di konfirmasi.']);
   }
 }

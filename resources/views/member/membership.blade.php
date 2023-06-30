@@ -68,15 +68,23 @@ $memberships = \App\Models\MembershipType::get();
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-body">
-                            <div class="alert alert-info">
+                            <div class="alert alert-info eot-body">
                               <strong>Perhatian!</strong><br />
                               <p>
                                 <strong>Transfer ke rekening xxx-xxx-xxx lalu upload bukti ke sini.</strong>
                               </p>
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3 ">
+                              <label for="" class="mb-1">Tipe Pembayaran</label>
+                              <select name="payment_type" id="" class="form-control" required>
+                                <option value="">-- Pilih Tipe Pembayaran --</option>
+                                <option value="transfer">Transfer</option>
+                                <option value="tunai">Tunai</option>
+                              </select>
+                            </div>
+                            <div class="form-group mb-3 eot-body" style="display: none;">
                               <label for="" class="mb-1">Bukti Transfer</label>
-                              <input type="file" name="payment_eot" id="" class="form-control" required />
+                              <input type="file" name="payment_eot" id="" class="form-control" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="" class="mb-1">Tanggal Mulai</label>

@@ -19,6 +19,12 @@ class TransactionController extends Controller
     $membership->status = 'approve';
     $membership->payment_approved = now();
     $membership->save();
+    if ($membership->payment_type == 'tunai') {
+      $membership->payment_total = request('payment_total');
+      $membership->payment_changes = request('payment_changes');
+      $membership->save();
+      return $this->invoice($membership,'Membership')->with(['success' => 'Transaksi telah diterima.']);
+    }
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }
   public function approvedPaymentPacket() {
@@ -26,6 +32,12 @@ class TransactionController extends Controller
     $membership->status = 'approve';
     $membership->payment_approved = now();
     $membership->save();
+    if ($membership->payment_type == 'tunai') {
+      $membership->payment_total = request('payment_total');
+      $membership->payment_changes = request('payment_changes');
+      $membership->save();
+      return $this->invoice($membership,'TrainerMember')->with(['success' => 'Transaksi telah diterima.']);
+    }
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }
   public function approvedPaymentProduct() {
@@ -33,6 +45,15 @@ class TransactionController extends Controller
     $membership->status = 'approve';
     $membership->payment_date = now();
     $membership->save();
+    if ($membership->payment_type == 'tunai') {
+      $membership->payment_total = request('payment_total');
+      $membership->payment_changes = request('payment_changes');
+      $membership->save();
+      return $this->invoice($membership,'Order')->with(['success' => 'Transaksi telah diterima.']);
+    }
     return back()->with(['success' => 'Transaksi telah diterima.']);
+  }
+  public function invoice($model,$type) {
+    return view('akuntan.invoice',compact('model','type'));
   }
 }

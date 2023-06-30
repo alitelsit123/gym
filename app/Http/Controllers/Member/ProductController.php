@@ -72,13 +72,15 @@ class ProductController extends Controller
 
       // Store the image in the specified disk and directory
       Storage::disk($disk)->putFileAs('/', $uploadedImage, '/product_payment/'.$imageName);
-      $order->e_date = now();
-      $order->gross_amount = $order->details()->sum('sub_amount');
+
       $order->payment_eot = $imageName;
-      $order->status = 'pending';
-      $order->save();
     }
-    return back()->with(['success' => 'Pembayaran berhasil, tunggu verifikasi admin.']);
+    $order->e_date = now();
+    $order->gross_amount = $order->details()->sum('sub_amount');
+    $order->status = 'pending';
+    $order->payment_type = $request->payment_type;
+    $order->save();
+    return back()->with(['success' => 'Pembayaran berhasil, tunggu di konfirmasi.']);
   }
   public function deleteCart($id) {
     OrderDetail::whereId($id)->delete();
