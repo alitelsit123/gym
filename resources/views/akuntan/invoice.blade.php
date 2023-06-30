@@ -66,7 +66,7 @@
             @endif
           </div>
           <div class="text-center" style="margin-top: 90px;">
-            <a><u class="text-info">View in browser</u></a>
+            <a href="#" onclick="window.print()"><u class="text-info">CETAK</u></a>
             <p>Gym Bersama</p>
           </div>
 
