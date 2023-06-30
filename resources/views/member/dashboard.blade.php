@@ -7,7 +7,7 @@
       $existingMembershipPending = \App\Models\Membership::whereUser_id(auth()->user()->id)->whereStatus('pending')->first();
       @endphp
       @if ($existingMembershipPending)
-      <div class="alert alert-warning">Kamu ada pembayaran yg belum dibayar, dilunasi segera agar dicek oleh admin!</div>
+      {{-- <div class="alert alert-warning"></div> --}}
       @endif
       <div class="bg-primary rounded-3">
         <div class="row mb-5 ">
@@ -41,7 +41,7 @@
                 <h4 class="btn-block font-weight-bold text-white"><strong>{{$row->type->name}}</strong> {{$row->type->class}}</h4>
                 @php
                 $duration = null;
-                if ($row->durationTypeLocal() == 'harian') {
+                if ($row->durationTypeLocal() == 'hari') {
                   $duration = \Carbon\Carbon::parse($row->start_date)->addDays($row->duration);
                 } else if($row->durationTypeLocal() == 'minggu') {
                   $duration = \Carbon\Carbon::parse($row->start_date)->addWeeks($row->duration);

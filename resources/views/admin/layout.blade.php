@@ -71,7 +71,7 @@
     <nav class="navbar-vertical navbar">
       <div class="nav-scroller">
         <!-- Brand logo -->
-        <a class="navbar-brand text-white font-weight-bold" href="{{url('admin')}}">
+        <a class="navbar-brand text-white font-weight-bold" style="font-size: 15px;" href="{{url('admin')}}">
           {{-- <img src="../assets/images/brand/logo/logo.svg" alt="" /> --}}
           MAHESA GYM & FITNESS
         </a>
@@ -419,12 +419,12 @@
             </li>
             <!-- List -->
             <li class="dropdown ms-2">
-              <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
+              {{-- <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-md avatar-indicators avatar-online">
                   <img alt="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="rounded-circle" />
                 </div>
-              </a>
+              </a> --}}
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                 <div class="px-4 pb-0 pt-2">
 

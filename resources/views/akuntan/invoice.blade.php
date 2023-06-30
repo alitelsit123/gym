@@ -24,7 +24,7 @@
             </div>
             <div class="col-xl-2">
               <p class="float-end">
-                Rp. {{number_format(($type == 'Membership' ? $model->type->{'price_'.$model->duration_type}:$model->packet->price))}}
+                Rp. {{number_format(($type == 'Membership' ? $model->type->{'price'}:$model->packet->price))}}
               </p>
             </div>
             <hr>
@@ -49,7 +49,10 @@
             <div class="col-xl-12">
               <p class="float-end fw-bold">
                 @if ($type != 'Order')
-                Total: Rp. {{number_format(($type == 'Membership' ? $model->type->{'price_'.$model->duration_type}:$model->packet->price))}}
+                @php
+                $price = number_format(($type == 'Membership' ? $model->type->price:$model->packet->price));
+                @endphp
+                Total: Rp. {{$price}}
                 @else
                 Total: Rp. {{number_format($model->gross_amount)}}
                 @endif

@@ -16,9 +16,9 @@ class MembershipController extends Controller
     return view('member.membership');
   }
   public function storePayment() {
-    request()->validate([
-      'duration' => ['required']
-    ]);
+    // request()->validate([
+    //   'duration' => ['required']
+    // ]);
     $type = MembershipType::findOrFail(request('type_id'));
 
     if ($type) {
@@ -71,6 +71,8 @@ class MembershipController extends Controller
         $membership->payment_eot = $imageName;
       }
       $membership->payment_type = request('payment_type');
+      $membership->duration = $type->duration;
+      $membership->duration_type = 'daily';
       $membership->save();
 
     }

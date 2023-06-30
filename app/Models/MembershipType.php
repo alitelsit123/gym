@@ -10,6 +10,6 @@ class MembershipType extends Model
     use HasFactory;
 
     protected $fillable = [
-      'name','price_daily','price_weekly','price_monthly','description','class'
+      'name','price_daily','price_weekly','price_monthly','description','class','price','duration'
     ];
 }

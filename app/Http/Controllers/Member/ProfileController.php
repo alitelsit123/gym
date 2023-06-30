@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Trainer;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
   public function index() {
-    return view('trainer.profile');
+    return view('member.profile');
   }
   public function update(Request $request) {
     // Validate the form data
@@ -19,7 +19,6 @@ class ProfileController extends Controller
       'phone' => 'required',
       'gender' => 'required',
       'address' => 'required',
-      'norek' => 'required',
     ]);
 
     // Update the user's data
@@ -28,7 +27,6 @@ class ProfileController extends Controller
     $user->phone = $request->input('phone');
     $user->gender = $request->input('gender');
     $user->address = $request->input('address');
-    $user->norek = $request->input('norek');
     $user->save();
 
     if (request()->image !== null && request()->hasFile('image')) {

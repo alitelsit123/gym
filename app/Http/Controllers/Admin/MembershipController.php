@@ -25,9 +25,8 @@ class MembershipController extends Controller
   {
       $validatedData = $request->validate([
           'name' => 'required',
-          'price_daily' => 'required|numeric',
-          'price_weekly' => 'required|numeric',
-          'price_monthly' => 'required|numeric',
+          'price' => 'required',
+          'duration' => 'required',
           'description' => 'nullable',
           'class' => 'required',
       ]);
@@ -45,9 +44,8 @@ class MembershipController extends Controller
   {
       $validatedData = $request->validate([
           'name' => 'required',
-          'price_daily' => 'required|numeric',
-          'price_weekly' => 'required|numeric',
-          'price_monthly' => 'required|numeric',
+          'price' => 'required|numeric',
+          'duration' => 'required',
           'description' => 'nullable',
           'class' => 'required',
       ]);

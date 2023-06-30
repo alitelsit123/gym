@@ -29,8 +29,8 @@ $memberships = \App\Models\Membership::has('type')->whereStatus('pending')->late
         @endif
       </td>
       <td>{{$row->type->name}}</td>
-      <td>Rp. {{ number_format($row->type->{'price_'.($row->duration_type ?? 'daily')}) }}</td>
-      <td>{{$row->duration}} {{$row->durationTypeLocal()}}</td>
+      <td>Rp. {{ number_format($row->type->price) }}</td>
+      {{-- <td>{{$row->duration}} {{$row->durationTypeLocal()}}</td> --}}
       <td>
         @if ($row->payment_type == 'transfer')
         <a href="{{url('akuntan/approved_payment?id='.$row->id)}}" onclick="return confirm('Approve Transaksi ?')" class="btn btn-sm btn-success">Approve</a>
@@ -68,12 +68,12 @@ $memberships = \App\Models\Membership::has('type')->whereStatus('pending')->late
                         $('.payment-{{$row->id}}').submit(function(e) {
                           const totalBayarEl = $(this).find('input[name="payment_total"]')
                           const totalChangesEl = $(this).find('input[name="payment_changes"]')
-                          if (parseInt(totalBayarEl.val()) < parseInt('{{ $row->type->{'price_'.$row->duration_type} }}')) {
-                            Swal.fire('Error!', 'Total tidak boleh kurang dari '+'Rp. {{ number_format($row->type->{'price_'.$row->duration_type}) }}','error')
+                          if (parseInt(totalBayarEl.val()) < parseInt('{{ $row->type->price }}')) {
+                            Swal.fire('Error!', 'Total tidak boleh kurang dari '+'Rp. {{ number_format($row->type->price) }}','error')
                             e.preventDefault()
                             return false
                           }
-                          $(this).find('input[name="payment_changes"]').val(parseInt(totalBayarEl.val()) - parseInt('{{ $row->type->{'price_'.$row->duration_type} }}'))
+                          $(this).find('input[name="payment_changes"]').val(parseInt(totalBayarEl.val()) - parseInt('{{ $row->type->price }}'))
                         })
                       })
                     </script>

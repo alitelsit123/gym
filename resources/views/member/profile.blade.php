@@ -1,7 +1,7 @@
-@extends('trainer.layout')
+@extends('member.layout')
 
 @section('body')
-<form method="post" action="{{url('trainer/profile/update')}}" enctype="multipart/form-data">
+<form method="post" action="{{url('member/profile/update')}}" enctype="multipart/form-data">
 
 <div class="card">
   <!-- card body -->
@@ -72,13 +72,6 @@
             <input type="text" class="form-control" value="{{auth()->user()->bank_name}}" placeholder="" name="bank_name" required="">
           </div>
         </div> --}}
-        <div class="mb-3 row">
-          <label for="email" class="col-sm-4 col-form-label
-              form-label">Info Rekening</label>
-          <div class="col-md-8 col-12">
-            <input type="text" class="form-control" value="{{auth()->user()->norek}}" placeholder="" name="norek" required="">
-          </div>
-        </div>
         <!-- row -->
         <div class="mb-3 row">
           <label for="phone" class="col-sm-4 col-form-label

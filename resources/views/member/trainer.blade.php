@@ -47,7 +47,9 @@ $packets = \App\Models\Packet::whereHas('trainer', function($query) {
                   $existingTrainerMemberPending = \App\Models\TrainerMember::whereMember_id(auth()->user()->id)->wherePacket_id($row->id)->whereStatus('pending')->first();
                   $existingTrainerMemberApprove = \App\Models\TrainerMember::whereMember_id(auth()->user()->id)->wherePacket_id($row->id)->whereStatus('approve')->first();
                   @endphp
-                  @if ($existingTrainerMemberPending || $existingTrainerMemberApprove)
+                  @if($existingTrainerMemberPending)
+                  <button type="button" class="btn btn-secondary w-100 hover:bg-secondary" disabled>Menunggu verifikasi pembayaran</button>
+                  @elseif ($existingTrainerMemberApprove)
                   <button type="button" class="btn btn-secondary w-100 hover:bg-secondary" disabled>Anda sudah berlangganan</button>
                   @else
                   <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}">Langganan</button>

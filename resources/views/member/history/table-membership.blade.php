@@ -20,8 +20,8 @@ $memberships = \App\Models\Membership::has('type')->whereUser_id(auth()->user()-
       <th scope="row">{{$k+1}}</th>
       <td>{{\Carbon\Carbon::parse($row->payment_date)->format('d, F Y')}}</td>
       <td>{{$row->type->name}}</td>
-      <td>{{ $row->type->{'price_'.($row->duration_type ?? 'daily')} }}</td>
-      <td>{{$row->duration}} {{$row->duration_type}}</td>
+      <td>{{ $row->type->{'price'} }}</td>
+      {{-- <td>{{$row->duration}} {{$row->duration_type}}</td> --}}
       <td>
         @if ($row->status == 'approve')
         <div class="badge bg-success">{{$row->status}}</div>

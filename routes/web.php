@@ -164,4 +164,9 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
     Route::get('/', [App\Http\Controllers\Member\HistoryController::class, 'index']);
   });
 
+  Route::prefix('profile')->group(function() {
+    Route::get('/',[App\Http\Controllers\Member\ProfileController::class, 'index']);
+    Route::post('update',[App\Http\Controllers\Member\ProfileController::class, 'update']);
+  });
+
 });

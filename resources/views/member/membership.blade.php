@@ -16,36 +16,11 @@ $memberships = \App\Models\MembershipType::get();
             <h4 class="font-weight-bold">{{$row->name}}</h4>
             <h4 class="badge bg-info">{{$row->class}}</h4>
             <p>{{Str::limit($row->description,35,'...')}}</p>
-            <!-- Checkbox and radio -->
-            <ul class="list-group">
-              <li class="list-group-item d-flex align-items-center justify-content-between">
-                <div>
-                  <input class="form-check-input me-1" type="radio" aria-label="..." name="type" value="daily" data-tr="Hari">
-                  Harian
-                </div>
-                <div>
-                  Rp. {{number_format($row->price_daily)}}
-                </div>
-              </li>
-              <li class="list-group-item d-flex align-items-center justify-content-between">
-                <div>
-                  <input class="form-check-input me-1" type="radio" aria-label="..." name="type" value="weekly" data-tr="Minggu">
-                  Mingguan
-                </div>
-                <div>
-                  Rp. {{number_format($row->price_weekly)}}
-                </div>
-              </li>
-              <li class="list-group-item d-flex align-items-center justify-content-between">
-                <div>
-                  <input class="form-check-input me-1" type="radio" aria-label="..." name="type" value="monthly" data-tr="Bulan">
-                  Bulanan
-                </div>
-                <div>
-                  Rp. {{number_format($row->price_monthly)}}
-                </div>
-              </li>
-            </ul>
+            <h3 class="text-center font-weight-bold">
+              <strong>
+                Rp. {{number_format($row->price_daily)}}
+              </strong>
+            </h3>
             <div class="alert alert-danger mb-0 mt-3 error-{{$row->id}}" style="display:none;">
               Pilih salah satu
             </div>
@@ -57,8 +32,9 @@ $memberships = \App\Models\MembershipType::get();
                 $existingMembershipPending = \App\Models\Membership::whereUser_id(auth()->user()->id)->where('membership_type_id', $row->id)->whereStatus('pending')->first();
                 $existingMembershipApproved = \App\Models\Membership::whereUser_id(auth()->user()->id)->where('membership_type_id', $row->id)->whereStatus('approve')->first();
                 @endphp
-
-                @if ($existingMembershipPending || $existingMembershipApproved)
+                @if($existingMembershipPending)
+                <button type="button" class="btn btn-warning w-100 hover:bg-warning" disabled>Menunggu verifikasi pembayaran</button>
+                @elseif ($existingMembershipApproved)
                 <button type="button" class="btn btn-secondary w-100 hover:bg-secondary" disabled>Anda sudah berlangganan</button>
                 @else
                 <button type="button" class="btn btn-success w-100 btn-open-modal-{{$row->id}}">Langganan</button>
@@ -90,10 +66,10 @@ $memberships = \App\Models\MembershipType::get();
                               <label for="" class="mb-1">Tanggal Mulai</label>
                               <input type="date" name="start_date" id="" class="form-control" required />
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                               <label for="" class="mb-1 typename-{{$row->id}}"></label>
                               <input type="number" name="duration" class="form-control" id="" required />
-                            </div>
+                            </div> --}}
 
                           </div>
                           <div class="modal-footer">
@@ -110,15 +86,16 @@ $memberships = \App\Models\MembershipType::get();
         <script>
           $(document).ready(function() {
             $('.btn-open-modal-{{$row->id}}').click(function(e) {
-              $('.error-{{$row->id}}').hide()
-              console.log($('input[name="type"]:checked'))
-              if ($('input[name="type"]:checked').length == 0) {
-                e.preventDefault()
-                $('.error-{{$row->id}}').show()
-              } else {
-                $('.typename-{{$row->id}}').text(`Total ${$('input[name="type"]:checked').first().data('tr')}`)
-                $('#exampleModal-{{$row->id}}').modal('show')
-              }
+              // $('.error-{{$row->id}}').hide()
+              // console.log($('input[name="type"]:checked'))
+              // if ($('input[name="type"]:checked').length == 0) {
+              //   e.preventDefault()
+              //   $('.error-{{$row->id}}').show()
+              // } else {
+              //   $('.typename-{{$row->id}}').text(`Total ${$('input[name="type"]:checked').first().data('tr')}`)
+              //   $('#exampleModal-{{$row->id}}').modal('show')
+              // }
+              $('#exampleModal-{{$row->id}}').modal('show')
             })
           })
         </script>

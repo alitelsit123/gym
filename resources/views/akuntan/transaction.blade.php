@@ -7,23 +7,23 @@
       <h4>Transaksi</h4>
     </div>
     <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="member-tab" data-bs-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="true">Paket</a>
-      </li>
       {{-- <li class="nav-item">
-        <a class="nav-link" id="trainer-tab" data-bs-toggle="tab" href="#trainer" role="tab" aria-controls="trainer" aria-selected="false">Membership</a>
+        <a class="nav-link active" id="member-tab" data-bs-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="true">Paket</a>
       </li> --}}
+      <li class="nav-item">
+        <a class="nav-link active" id="trainer-tab" data-bs-toggle="tab" href="#trainer" role="tab" aria-controls="trainer" aria-selected="false">Membership</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" id="product-tab" data-bs-toggle="tab" href="#product" role="tab" aria-controls="product" aria-selected="false">Produk</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="member" role="tabpanel" aria-labelledby="member-tab">
+      {{-- <div class="tab-pane fade show active" id="member" role="tabpanel" aria-labelledby="member-tab">
         @include('akuntan.history.table-packet')
-      </div>
-      {{-- <div class="tab-pane fade" id="trainer" role="tabpanel" aria-labelledby="trainer-tab">
-        @include('akuntan.history.table-membership')
       </div> --}}
+      <div class="tab-pane fade show active" id="trainer" role="tabpanel" aria-labelledby="trainer-tab">
+        @include('akuntan.history.table-membership')
+      </div>
       <div class="tab-pane fade" id="product" role="tabpanel" aria-labelledby="product-tab">
         @include('akuntan.history.table-product')
       </div>

@@ -33,16 +33,12 @@ $memberships = \App\Models\MembershipType::get();
                       <input type="text" id="" name="class" class="form-control" placeholder="">
                     </div>
                     <div class="form-group mb-3">
-                      <label class="form-label" for="">Harga Harian</label>
-                      <input type="number" id="" name="price_daily" class="form-control" placeholder="">
+                      <label class="form-label" for="">Harga</label>
+                      <input type="number" id="" name="price" class="form-control" placeholder="" />
                     </div>
                     <div class="form-group mb-3">
-                      <label class="form-label" for="">Harga Mingguan</label>
-                      <input type="number" id="" name="price_weekly" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group mb-3">
-                      <label class="form-label" for="">Harga Bulanan</label>
-                      <input type="number" id="" name="price_monthly" class="form-control" placeholder="">
+                      <label class="form-label" for="">Durasi (hari)</label>
+                      <input type="number" id="" name="duration" class="form-control" placeholder="">
                     </div>
                     <div class="form-group">
                       <label class="form-label" for="">Keterangan</label>
@@ -77,9 +73,7 @@ $memberships = \App\Models\MembershipType::get();
           <td>{{$row->name}}</td>
           <td>{{$row->class}}</td>
           <td>
-            <div class="badge bg-info">Rp. {{number_format($row->price_daily)}} / Hari</div><br />
-            <div class="badge bg-info">Rp. {{number_format($row->price_weekly)}} / Minggu</div><br />
-            <div class="badge bg-info">Rp. {{number_format($row->price_monthly)}} / Bulan</div>
+            <div class="badge bg-info">Rp. {{number_format($row->price)}}</div>
           </td>
           <td>{{$row->description}}</td>
           <td>
@@ -106,19 +100,15 @@ $memberships = \App\Models\MembershipType::get();
                           </div>
                           <div class="form-group mb-3">
                             <label class="form-label" for="">Kelas</label>
-                            <input type="text" id="" name="class" class="form-control" placeholder="">
+                            <input type="text" id="" name="class" class="form-control" value="{{$row->class}}" placeholder="">
                           </div>
                           <div class="form-group mb-3">
-                            <label class="form-label" for="">Harga Harian</label>
-                            <input type="number" id="" name="price_daily" class="form-control" value="{{$row->price_daily}}" placeholder="">
+                            <label class="form-label" for="">Harga</label>
+                            <input type="number" id="" name="price" class="form-control" value="{{$row->price}}" placeholder="">
                           </div>
                           <div class="form-group mb-3">
-                            <label class="form-label" for="">Harga Mingguan</label>
-                            <input type="number" id="" name="price_weekly" class="form-control" value="{{$row->price_weekly}}" placeholder="">
-                          </div>
-                          <div class="form-group mb-3">
-                            <label class="form-label" for="">Harga Bulanan</label>
-                            <input type="number" id="" name="price_monthly" class="form-control" value="{{$row->price_monthly}}" placeholder="">
+                            <label class="form-label" for="">Durasi (hari)</label>
+                            <input type="number" id="" name="duration" class="form-control" value="{{$row->duration}}" placeholder="">
                           </div>
                           <div class="form-group">
                             <label class="form-label" for="">Keterangan</label>
