@@ -128,6 +128,11 @@ Route::prefix('admin')->middleware('auth.role')->group(function() {
     Route::get('/',[App\Http\Controllers\Admin\TransactionController::class, 'index']);
   });
 
+  Route::prefix('profile')->group(function() {
+    Route::get('/',[App\Http\Controllers\Admin\ProfileController::class, 'index']);
+    Route::post('update',[App\Http\Controllers\Admin\ProfileController::class, 'update']);
+  });
+
 });
 
 Route::prefix('akuntan')->middleware('auth.role')->group(function() {
@@ -137,6 +142,10 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
   Route::get('/approved_payment_product', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentProduct']);
   Route::get('invoice', [App\Http\Controllers\Akuntan\TransactionController::class, 'invoice']);
 
+  Route::prefix('profile')->group(function() {
+    Route::get('/',[App\Http\Controllers\Akuntan\ProfileController::class, 'index']);
+    Route::post('update',[App\Http\Controllers\Akuntan\ProfileController::class, 'update']);
+  });
 });
 
 Route::prefix('member')->middleware('auth.role')->group(function() {

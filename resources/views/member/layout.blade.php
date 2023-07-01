@@ -43,7 +43,7 @@
   <script src="{{url('/assets/js/theme.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <title>Trainer - MAHESA GYM & FITNESS</title>
+  <title>Member - MAHESA GYM & FITNESS</title>
 </head>
 
 <body class="bg-light">

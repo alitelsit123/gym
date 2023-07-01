@@ -15,7 +15,7 @@ $memberships = \App\Models\MembershipType::get();
           <div class="card-body">
             <h4 class="font-weight-bold">{{$row->name}}</h4>
             <h4 class="badge bg-info">{{$row->class}}</h4>
-            <p>{{Str::limit($row->description,35,'...')}}</p>
+            <p>{{$row->description}}</p>
             <h3 class="text-center font-weight-bold">
               <strong>
                 Rp. {{number_format($row->price_daily)}}
