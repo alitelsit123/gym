@@ -1,4 +1,4 @@
-@extends('akuntan.layout')
+@extends('trainer.layout')
 
 @section('body')
 
