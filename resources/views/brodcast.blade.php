@@ -30,11 +30,11 @@
         @include('akuntan.history.table-packet')
       </div> --}}
       <div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
-        @include('akuntan.broadcast.single')
+        @include('broadcast.single')
       </div>
       @foreach (['member','trainer','admin'] as $item)
       <div class="tab-pane fade" id="{{$item}}" role="tabpanel" aria-labelledby="{{$item}}-tab">
-        @include('akuntan.broadcast.type', ['type' => $item])
+        @include('broadcast.type', ['type' => $item])
       </div>
       @endforeach
     </div>

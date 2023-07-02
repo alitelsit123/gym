@@ -219,4 +219,8 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
     Route::post('store_type',[App\Http\Controllers\BroadcastController::class, 'storeType']);
   });
 
+  Route::prefix('chat')->group(function() {
+    Route::get('/',[App\Http\Controllers\ChatController::class, 'index']);
+  });
+
 });
