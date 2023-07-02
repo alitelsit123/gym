@@ -1,5 +1,5 @@
 @php
-$order = \App\Models\Order::whereHas('details', function($query) {$query->has('product');})->where('status', '<>', 'cart')->whereUser_id(auth()->id())->get();
+$order = \App\Models\Order::where('status', '<>', 'cart')->whereUser_id(auth()->id())->get();
 @endphp
 <table class="table table-centered text-nowrap mb-0">
   <thead class="table-light">
