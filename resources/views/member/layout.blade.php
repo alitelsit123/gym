@@ -105,6 +105,11 @@
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Riwayat
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url(auth()->user()->role.'/broadcast')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Broadcast Notifikasi
+            </a>
+          </li>
           {{-- <li class="nav-item">
             <a class="nav-link has-arrow " href="{{url('member/profile')}}">
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Profile

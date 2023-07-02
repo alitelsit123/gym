@@ -95,6 +95,12 @@ Route::prefix('trainer')->middleware('auth.role')->group(function() {
 
   Route::get('/approved_payment_packet', [App\Http\Controllers\Trainer\TransactionController::class, 'approvedPaymentPacket']);
 
+  Route::prefix('broadcast')->group(function() {
+    Route::get('/',[App\Http\Controllers\BroadcastController::class, 'index']);
+    Route::post('store',[App\Http\Controllers\BroadcastController::class, 'store']);
+    Route::post('store_type',[App\Http\Controllers\BroadcastController::class, 'storeType']);
+  });
+
 });
 
 Route::prefix('admin')->middleware('auth.role')->group(function() {
@@ -131,6 +137,12 @@ Route::prefix('admin')->middleware('auth.role')->group(function() {
   Route::prefix('profile')->group(function() {
     Route::get('/',[App\Http\Controllers\Admin\ProfileController::class, 'index']);
     Route::post('update',[App\Http\Controllers\Admin\ProfileController::class, 'update']);
+  });
+
+  Route::prefix('broadcast')->group(function() {
+    Route::get('/',[App\Http\Controllers\BroadcastController::class, 'index']);
+    Route::post('store',[App\Http\Controllers\BroadcastController::class, 'store']);
+    Route::post('store_type',[App\Http\Controllers\BroadcastController::class, 'storeType']);
   });
 
 });
@@ -199,6 +211,12 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
   Route::prefix('profile')->group(function() {
     Route::get('/',[App\Http\Controllers\Member\ProfileController::class, 'index']);
     Route::post('update',[App\Http\Controllers\Member\ProfileController::class, 'update']);
+  });
+
+  Route::prefix('broadcast')->group(function() {
+    Route::get('/',[App\Http\Controllers\BroadcastController::class, 'index']);
+    Route::post('store',[App\Http\Controllers\BroadcastController::class, 'store']);
+    Route::post('store_type',[App\Http\Controllers\BroadcastController::class, 'storeType']);
   });
 
 });
