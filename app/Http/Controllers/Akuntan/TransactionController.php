@@ -25,6 +25,7 @@ class TransactionController extends Controller
       $membership->save();
       return $this->invoice($membership,'Membership')->with(['success' => 'Transaksi telah diterima.']);
     }
+    $membership->user->notify(new \App\Notifications\ProductNotification(['model' => 'Membership', 'target' => $membership],'Transaksi #'.$membership->id.' sudah diverifikasi anda telah berlangganan '.$membership->type->name));
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }
   public function approvedPaymentPacket() {
@@ -38,6 +39,8 @@ class TransactionController extends Controller
       $membership->save();
       return $this->invoice($membership,'TrainerMember')->with(['success' => 'Transaksi telah diterima.']);
     }
+    $membership->user->notify(new \App\Notifications\ProductNotification(['model' => 'TrainerMember', 'target' => $membership],'Transaksi #'.$membership->code.' sudah diverifikasi anda telah berlangganan '.$membership->packet->title));
+    $membership->packet->trainer->notify(new \App\Notifications\ProductNotification(['model' => 'TrainerMember', 'target' => $membership],$membership->user->name.' telah bergabung ke kelas '.$membership->packet->title));
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }
   public function approvedPaymentProduct() {
@@ -51,6 +54,7 @@ class TransactionController extends Controller
       $membership->save();
       return $this->invoice($membership,'Order')->with(['success' => 'Transaksi telah diterima.']);
     }
+    $membership->user->notify(new \App\Notifications\ProductNotification(['model' => 'Order', 'target' => $membership],'Transaksi produk #'.$membership->id.' sudah diverifikasi'));
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }
   public function invoice($model,$type) {

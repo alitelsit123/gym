@@ -7,20 +7,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-use App\Models\Product;
+use App\Models\Order;
 
 class ProductNotification extends Notification
 {
     use Queueable;
 
+    public $model;
     public $target;
+    public $text;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Product $product)
+    public function __construct($_order, $text)
     {
-      $this->target = $product;
+      $this->model = $_order['model'];
+      $this->target = $_order['target'];
+      $this->text = $text;
     }
 
     /**
@@ -59,7 +63,9 @@ class ProductNotification extends Notification
     public function toDatabase(object $notifiable): array
     {
         return [
-
+          'target' => $this->model,
+          'target_id' => $this->target->id,
+          'text' => $this->text
         ];
     }
 }

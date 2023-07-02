@@ -23,6 +23,8 @@ class TransactionController extends Controller
       $membership->save();
       return $this->invoice($membership,'TrainerMember')->with(['success' => 'Transaksi telah diterima.']);
     }
+    $membership->user->notify(new \App\Notifications\ProductNotification(['model' => 'TrainerMember', 'target' => $membership],'Transaksi #'.$membership->code.' sudah diverifikasi anda telah berlangganan '.$membership->packet->title));
+
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }
   public function invoice($model,$type) {

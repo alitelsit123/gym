@@ -74,7 +74,9 @@ class MembershipController extends Controller
       $membership->duration = $type->duration;
       $membership->duration_type = 'daily';
       $membership->save();
-
+      foreach (\App\Models\User::whereRole('akuntan')->get() as $rowAkuntan) {
+        $rowAkuntan->notify(new \App\Notifications\ProductNotification(['model' => 'Membership', 'target' => $membership],'Transaksi produk baru #'.$membership->id));
+      }
     }
     return back()->with(['success' => 'Berhasil dikirim, tunggu di konfirmasi.']);
   }

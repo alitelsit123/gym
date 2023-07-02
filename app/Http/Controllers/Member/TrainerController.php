@@ -65,6 +65,8 @@ class TrainerController extends Controller
 
     $existingTrainerMemberPending->save();
 
+    $existingTrainerMemberPending->packet->trainer->notify(new \App\Notifications\ProductNotification(['model' => 'TrainerMember', 'target' => $existingTrainerMemberPending],'Transaksi baru #'.$existingTrainerMemberPending->id.' untuk paket '.$existingTrainerMemberPending->packet->title));
+
     return back()->with(['success' => 'Berhasil dikirim, tunggu di konfirmasi.']);
   }
 }

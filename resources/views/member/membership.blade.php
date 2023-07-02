@@ -18,7 +18,7 @@ $memberships = \App\Models\MembershipType::get();
             <p>{{$row->description}}</p>
             <h3 class="text-center font-weight-bold">
               <strong>
-                Rp. {{number_format($row->price_daily)}}
+                Rp. {{number_format($row->price)}}
               </strong>
             </h3>
             <div class="alert alert-danger mb-0 mt-3 error-{{$row->id}}" style="display:none;">

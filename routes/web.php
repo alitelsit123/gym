@@ -163,6 +163,12 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
     Route::post('update/{id}',[App\Http\Controllers\Akuntan\MembershipController::class, 'update']);
   });
 
+  Route::prefix('broadcast')->group(function() {
+    Route::get('/',[App\Http\Controllers\Akuntan\BroadcastController::class, 'index']);
+    Route::post('store',[App\Http\Controllers\Akuntan\BroadcastController::class, 'store']);
+    Route::post('store_type',[App\Http\Controllers\Akuntan\BroadcastController::class, 'storeType']);
+  });
+
 });
 
 Route::prefix('member')->middleware('auth.role')->group(function() {

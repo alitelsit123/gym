@@ -80,6 +80,9 @@ class ProductController extends Controller
     $order->status = 'pending';
     $order->payment_type = $request->payment_type;
     $order->save();
+    foreach (\App\Models\User::whereRole('akuntan')->get() as $rowAkuntan) {
+      $rowAkuntan->notify(new \App\Notifications\ProductNotification(['model' => 'Order', 'target' => $order],'Transaksi produk baru #'.$order->id));
+    }
     return back()->with(['success' => 'Pembayaran berhasil, tunggu di konfirmasi.']);
   }
   public function deleteCart($id) {
