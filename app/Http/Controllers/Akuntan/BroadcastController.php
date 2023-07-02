@@ -17,7 +17,7 @@ class BroadcastController extends Controller
     return back()->with(['success' => 'Berhasil dikirim.']);
   }
   public function storeType() {
-    $users = User::whereRole(request('type'))->get();
+    $users = User::where('id','<>',auth()->user()->id)->get();
     foreach ($users as $row) {
       $row->notify(new \App\Notifications\ProductNotification(['model' => 'User', 'target' => auth()->user()],request('text')));
     }

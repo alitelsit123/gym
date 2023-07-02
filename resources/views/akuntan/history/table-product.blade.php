@@ -85,9 +85,24 @@ $order = \App\Models\Order::where('status', 'pending')->get();
                         <input type="hidden" name="id" value="{{$row->id}}">
                         <div class="modal-body">
                           <div class="form-group mb-3">
-                            <label for="">Total Bayar</label>
-                            <input type="number" name="payment_total" value="0" id="" class="form-control" />
+                            <label for="">Total Harga</label>
+                            <input type="string" value="Rp {{number_format($row->gross_amount)}}" id="" class="form-control" disabled />
                           </div>
+                          <div class="form-group mb-3">
+                            <label for="">Total Bayar</label>
+                            <input type="number" name="payment_total" value="0" id="" class="form-control payment_totalm{{$row->id}}" />
+                          </div>
+                          <div class="form-group mb-3">
+                            <label for="">Kembalian</label>
+                            <input type="text" value="Rp 0" id="" class="form-control kembalim{{$row->id}}" disabled />
+                          </div>
+                          <script>
+                          $(document).ready(function() {
+                            $('.payment_totalm{{$row->id}}').keyup(function() {
+                              $('.kembalim{{$row->id}}').val(`Rp ${($(this).val() - {{$row->gross_amount}}).toLocaleString('us', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`)
+                            })
+                          })
+                          </script>
                           <div class="form-group" style="display: none;">
                             <label for="">Kembalian</label>
                             <input type="number" name="payment_changes" value="0" id="" class="form-control" />

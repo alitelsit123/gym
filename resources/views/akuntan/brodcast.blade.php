@@ -6,7 +6,7 @@
 <div class="card">
   <div class="card-body">
     <div class="d-flex align-items-center justify-content-between">
-      <h4>Transaksi</h4>
+      <h4>Broadcast</h4>
     </div>
     <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
       {{-- <li class="nav-item">

@@ -6,7 +6,7 @@
 <div class="card">
   <div class="card-body">
     <div class="d-flex align-items-center justify-content-between">
-      <h4>Transaksi</h4>
+      <h4>Broadcast</h4>
     </div>
     <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
       {{-- <li class="nav-item">
@@ -16,13 +16,7 @@
         <a class="nav-link active" id="single-tab" data-bs-toggle="tab" href="#single" role="tab" aria-controls="single" aria-selected="false">Individu</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="member-tab" data-bs-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="false">Semua Member</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="trainer-tab" data-bs-toggle="tab" href="#trainer" role="tab" aria-controls="trainer" aria-selected="false">Semua Trainer</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="admin-tab" data-bs-toggle="tab" href="#admin" role="tab" aria-controls="admin" aria-selected="false">Semua Admin</a>
+        <a class="nav-link" id="all-tab" data-bs-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">Semua</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -32,11 +26,14 @@
       <div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
         @include('broadcast.single')
       </div>
-      @foreach (['member','trainer','admin'] as $item)
+      <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
+        @include('broadcast.all')
+      </div>
+      {{-- @foreach (['member','trainer','admin'] as $item)
       <div class="tab-pane fade" id="{{$item}}" role="tabpanel" aria-labelledby="{{$item}}-tab">
         @include('broadcast.type', ['type' => $item])
       </div>
-      @endforeach
+      @endforeach --}}
     </div>
   </div>
 </div>

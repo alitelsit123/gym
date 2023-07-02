@@ -224,3 +224,8 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
   });
 
 });
+
+Route::get('notification/{id}', function($id) {
+  \App\Models\User::findOrFail($id)->notifications->markAsRead();
+  return redirect()->back();
+});

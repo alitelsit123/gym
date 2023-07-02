@@ -65,6 +65,7 @@ $packets = \App\Models\Packet::whereHas('trainer', function($query) {
                                   <strong>Transfer ke rekening {{$row->trainer->norek}} lalu upload bukti ke sini.</strong>
                                 </p>
                               </div>
+
                               <div class="form-group mb-3 ">
                                 <label for="" class="mb-1">Tipe Pembayaran</label>
                                 <select name="payment_type" id="" class="form-control class{{$row->id}}" required>

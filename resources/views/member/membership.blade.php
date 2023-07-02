@@ -44,6 +44,8 @@ $memberships = \App\Models\MembershipType::get();
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
                           <div class="modal-body">
+                            <div class="modal-title"><h4>Langganan <strong>{{$row->name}} {{$row->class}}</strong></h4></div>
+                            <hr />
                             <div class="alert alert-info eot-body{{$row->id}}">
                               <strong>Perhatian!</strong><br />
                               <p>

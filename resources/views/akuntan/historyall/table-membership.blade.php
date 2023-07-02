@@ -28,7 +28,7 @@ $memberships = \App\Models\Membership::has('type')->latest()->get();
       <td>{{ $row->type->{'price_'.($row->duration_type ?? 'daily')} }}</td>
       <td>{{$row->duration}} {{$row->durationTypeLocal()}}</td>
       <td>
-        @if ($row->status == 'approve')
+        @if ($row->status == 'approve' || $row->status == 'settlement')
         <div class="badge bg-success">{{$row->status}}</div>
         @else
         <div class="badge bg-warning">{{$row->status}}</div>
