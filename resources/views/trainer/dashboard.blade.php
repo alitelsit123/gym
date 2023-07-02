@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
+        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5" style="cursor:pointer;" onclick="document.location.href='{{url('trainer/member')}}'">
           <!-- card -->
           <div class="card h-100 card-lift">
             <!-- card body -->
@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5">
+        <div class="col-xl-3 col-lg-6 col-md-12 col-12 mb-5" style="cursor:pointer;" onclick="document.location.href='{{url('trainer/packet')}}'">
           <!-- card -->
           <div class="card h-100 card-lift">
             <!-- card body -->

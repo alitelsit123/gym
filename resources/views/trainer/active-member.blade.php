@@ -46,9 +46,9 @@ $packets = \App\Models\Packet::all();
                     <td>{{\Carbon\Carbon::parse($row->start_date ?? date('Y-m-d'))->addDays($row->duration)->diffInDays()}} Hari</td>
                     <td>
                       <!-- labels -->
-                      <div class="progress mb-1">
+                      {{-- <div class="progress mb-1">
                         <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                      </div>
+                      </div> --}}
                       <a class="btn btn-sm btn-primary mb-2" target="_blank" href="{{url('trainer/member/schedule-nutrition/'.$row->id)}}">Lihat Jadwal Nutrisi</a>
                       {{-- <!-- Modal -->
                       <div class="modal fade" id="nutrition-modal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,9 +83,9 @@ $packets = \App\Models\Packet::all();
                       </div> --}}
                       <hr />
                       <!-- labels -->
-                      <div class="progress mb-1">
+                      {{-- <div class="progress mb-1">
                         <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                      </div>
+                      </div> --}}
                       <a class="btn btn-sm btn-primary mb-2" target="_blank" href="{{url('trainer/member/schedule-exercise/'.$row->id)}}">Lihat Jadwal Latihan</a>
                     </td>
                   </tr>

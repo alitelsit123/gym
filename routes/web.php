@@ -146,6 +146,23 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
     Route::get('/',[App\Http\Controllers\Akuntan\ProfileController::class, 'index']);
     Route::post('update',[App\Http\Controllers\Akuntan\ProfileController::class, 'update']);
   });
+
+  Route::prefix('product')->group(function() {
+    Route::get('/',[App\Http\Controllers\Akuntan\ProductController::class, 'index']);
+    Route::post('store',[App\Http\Controllers\Akuntan\ProductController::class, 'store']);
+    Route::get('destroy',[App\Http\Controllers\Akuntan\ProductController::class, 'destroy']);
+    Route::post('update/{id}',[App\Http\Controllers\Akuntan\ProductController::class, 'update']);
+  });
+
+  Route::prefix('membership')->group(function() {
+    Route::get('/',[App\Http\Controllers\Akuntan\MembershipController::class, 'index']);
+    Route::get('subscribers',[App\Http\Controllers\Akuntan\MembershipController::class, 'subscribers']);
+    Route::get('expired_membership',[App\Http\Controllers\Akuntan\MembershipController::class, 'expiredMembership']);
+    Route::post('store',[App\Http\Controllers\Akuntan\MembershipController::class, 'store']);
+    Route::get('destroy',[App\Http\Controllers\Akuntan\MembershipController::class, 'destroy']);
+    Route::post('update/{id}',[App\Http\Controllers\Akuntan\MembershipController::class, 'update']);
+  });
+
 });
 
 Route::prefix('member')->middleware('auth.role')->group(function() {

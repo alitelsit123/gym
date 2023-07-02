@@ -84,6 +84,18 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('akuntan/membership')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Membership
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('akuntan/product')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Toko
+            </a>
+          </li>
+
           {{-- <li class="nav-item">
             <form action="{{url('logout')}}" method="post" id="logout"></form>
             <a class="nav-link has-arrow " href="#" onclick="$('#logout').submit()">
