@@ -20,4 +20,7 @@ class TrainerMember extends Model
     public function user() {
       return $this->belongsTo('App\Models\User', 'member_id');
     }
+    public function absent() {
+      return $this->hasMany('App\Models\AbsentExercise','trainer_member_id');
+    }
 }

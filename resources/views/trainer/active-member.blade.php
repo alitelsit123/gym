@@ -43,50 +43,19 @@ $packets = \App\Models\Packet::all();
                   @foreach ($members as $row)
                   <tr>
                     <td>{{$row->member->name}}</td>
-                    <td>{{\Carbon\Carbon::parse($row->start_date ?? date('Y-m-d'))->addDays($row->duration)->diffInDays()}} Hari</td>
                     <td>
-                      <!-- labels -->
-                      {{-- <div class="progress mb-1">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                      </div> --}}
+                      {{\Carbon\Carbon::parse($row->start_date ?? date('Y-m-d'))->addDays($row->duration)->diffInDays()}} Hari
+                      <br />
+                      <span @if(($row->packet->meet_count - $row->absent()->count()) <= 0) style="color:red;" @endif>Pertemuan {{$row->packet->meet_count - $row->absent()->count()}}x</span>
+                    </td>
+                    <td>
+                      @if (($row->packet->meet_count - $row->absent()->count()) <= 0)
+                      <a class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menyelesaikan latihan ?')">Selesai latihan</a>
+                      @else
                       <a class="btn btn-sm btn-primary mb-2" target="_blank" href="{{url('trainer/member/schedule-nutrition/'.$row->id)}}">Lihat Jadwal Nutrisi</a>
-                      {{-- <!-- Modal -->
-                      <div class="modal fade" id="nutrition-modal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                  <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Jadwal Nutrisi {{$row->member->name}}</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                      </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <table class="table">
-                                      <thead>
-                                        <tr>
-                                          <th>Hari</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td></td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-primary">Save changes</button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div> --}}
                       <hr />
-                      <!-- labels -->
-                      {{-- <div class="progress mb-1">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                      </div> --}}
                       <a class="btn btn-sm btn-primary mb-2" target="_blank" href="{{url('trainer/member/schedule-exercise/'.$row->id)}}">Lihat Jadwal Latihan</a>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

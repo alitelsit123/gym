@@ -44,6 +44,10 @@ $packets = \App\Models\Packet::get();
                       <label class="form-label" for="">Durasi (hari)</label>
                       <input type="number" id="" name="duration" class="form-control" placeholder="" />
                     </div>
+                    <div class="form-group mb-3">
+                      <label class="form-label" for="">Jumlah Pertemuan</label>
+                      <input type="number" id="" name="meet_count" class="form-control" placeholder="" />
+                    </div>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -73,7 +77,7 @@ $packets = \App\Models\Packet::get();
           <td>
             <div>{{$row->title}}</div>
           </td>
-          <td>Rp. {{number_format($row->price)}} <div class="badge bg-info">{{$row->duration}} Hari</div></td>
+          <td>Rp. {{number_format($row->price)}} <br /><div class="badge bg-info">{{$row->duration}} Hari</div><div class="badge bg-info">Pertemuan {{$row->meet_count}}x</div></td>
           <td>
             <img src="{{asset('storage/packet/'.$row->image)}}" alt="" srcset="" style="width:70px;height:auto;" />
           </td>
@@ -115,6 +119,10 @@ $packets = \App\Models\Packet::get();
                           <div class="form-group mb-3">
                             <label class="form-label" for="">Durasi (hari)</label>
                             <input type="number" id="" name="duration" class="form-control" placeholder="" value="{{$row->duration}}" />
+                          </div>
+                          <div class="form-group mb-3">
+                            <label class="form-label" for="">Jumlah Pertemuan</label>
+                            <input type="number" id="" name="meet_count" value="{{$row->meet_count}}" class="form-control" placeholder="" />
                           </div>
                         </div>
                         <div class="modal-footer">

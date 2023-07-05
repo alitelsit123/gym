@@ -70,53 +70,65 @@
         </div>
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
-        $nutritions = \App\Models\ScheduleNutrition::whereUser_id(auth()->id())->where('daym',$currentDay)->get();
+        $nutritions = \App\Models\ScheduleNutrition::whereUser_id(auth()->id())->get();
         @endphp
-        <h4 class="mb-3">Jadwal Nutrisi Hari Ini</h4>
+        <h4 class="mb-3">Jadwal Nutrisi</h4>
         <div class="row">
-          <div class="col-md-3">
-            @forelse ($nutritions as $row)
+          @forelse ($nutritions as $row)
+          <div class="col-md-4">
             @php
             $startOfWeek = \Carbon\Carbon::now()->startOfWeek();
             @endphp
-            <div class="card">
+            <div class="card w-100">
               <div style="position:relative;">
                 <img style="width:100%;height:auto;opacity:.2" src="https://s30386.pcdn.co/wp-content/uploads/2020/02/p1bm5844cb6oacnd1std183s12gt6.jpg.optimal.jpg" class="rounded" alt="...">
                 <h3 class="p-2 text-center" style="position:absolute;width:100%;height:100%;left:0;top:0;display:flex;align-items:center;justify-content:center;">
                   <strong>
-                    {{$row->description}}
+                    {{$startOfWeek->subDays(1)->addDays($row->daym)->locale('id')->isoFormat('dddd')}}</h5>
                   </strong>
                 </h3>
               </div>
               <div class="card-body">
-                {{$startOfWeek->subDays(1)->addDays($row->daym)->locale('id')->isoFormat('dddd')}}</h5>
+                <small>{!!str_replace("\r\n", '<hr />', $row->description)!!}</small>
               </div>
             </div>
-            @empty
-            <div class="card">
-              <div class="card-body">Belum ada Jadwal</div>
-            </div>
-            @endforelse
           </div>
+          @empty
+          <div class="card">
+            <div class="card-body">Belum ada Jadwal</div>
+          </div>
+          @endforelse
         </div>
 
-        <h4 class="my-3 mt-4">Jadwal Latihan Hari Ini</h4>
+        <h4 class="my-3 mt-4">Jadwal Latihan</h4>
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
-        $exercises = \App\Models\ScheduleExercise::whereUser_id(auth()->id())->where('daym',$currentDay)->get();
+        $exercises = \App\Models\ScheduleExercise::has('packet')->whereUser_id(auth()->id())->get();
+        $startOfWeek = \Carbon\Carbon::now()->startOfWeek()->subDays(1);
+        $daysEx = [];
         @endphp
         <div class="card">
           <div class="card-body">
             <table class="table table-stripped w-100">
               <thead>
                 <tr>
+                  <th>#Paket</th>
+                  <th>Hari</th>
                   <th>Latihan</th>
                   <th style="width: 150px;">#</th>
                 </tr>
               </thead>
               <tbody>
                 @forelse ($exercises as $row)
+                @php
+                $dIso = $startOfWeek->addDays($row->daym)->locale('id')->isoFormat('dddd');
+                @endphp
                 <tr>
+                  <td>{{$row->packet->title}}</td>
+                  <td>{{$dIso}}</td>
+                  @php
+                  $daysEx[] = $dIso;
+                  @endphp
                   <td>{{$row->description}}</td>
                   <td>
                     @php
@@ -131,7 +143,7 @@
                       <input type="hidden" name="trainer_member_id" value="{{$row->trainer_member_id}}" />
                       <input type="hidden" name="packet_id" value="{{$row->packet_id}}" />
                       <input type="hidden" name="schedule_exercise_id" value="{{$row->id}}" />
-                      <button type="submit" class="btn btn-success btn-sm">Absent</button>
+                      <button type="submit" class="btn btn-primary btn-sm">Absent</button>
                     </form>
                     @else
                     <div class="badge bg-success">Sudah Absent</div>
@@ -161,10 +173,19 @@
                   })
                 </script>
                 @empty
-                <tr colspan="2">
+                <tr colspan="4">
                   <td>Belum ada latihan</td>
                 </tr>
                 @endforelse
+                @if ($exercises->count() > 0)
+                <tr>
+                  <td colspan="4">
+                    <div class="alert alert-info">
+                      <strong>Selain hari {{ucfirst(implode(', ', $daysEx))}} silahkan latihan sendiri.</strong>
+                    </div>
+                  </td>
+                </tr>
+                @endif
               </tbody>
             </table>
           </div>

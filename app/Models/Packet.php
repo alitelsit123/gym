@@ -10,7 +10,7 @@ class Packet extends Model
     use HasFactory;
 
     protected $fillable = [
-      'code','title','description','image','price','trainer_id','duration'
+      'code','title','description','image','price','trainer_id','duration','meet_count'
     ];
 
     public function trainer() {

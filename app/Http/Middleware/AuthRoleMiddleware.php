@@ -17,10 +17,11 @@ class AuthRoleMiddleware
     {
       $user = auth()->user();
       if (!$user) {
-        return redirect('login');
+        return redirect('login')->with(['error' => 'Sesi kedaluarsa. mohon login ulang!']);
       }
       if ($request->segment(1) !== $user->role) {
-        abort(401);
+        auth()->logout();
+        return redirect('/login')->with(['error' => ucfirst($user->role).' tidak bisa mengakses halaman '.$request->segment(1).', silahkan login menggunakan akun '.$user->role]);
       }
       return $next($request);
     }

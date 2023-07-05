@@ -154,6 +154,13 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
   Route::get('/approved_payment_product', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentProduct']);
   Route::get('invoice', [App\Http\Controllers\Akuntan\TransactionController::class, 'invoice']);
 
+  Route::prefix('beban')->group(function() {
+    Route::get('/',[App\Http\Controllers\Akuntan\ExpenseController::class, 'index']);
+    Route::post('store',[App\Http\Controllers\Akuntan\ExpenseController::class, 'store']);
+    Route::post('update/{id}',[App\Http\Controllers\Akuntan\ExpenseController::class, 'update']);
+    Route::get('destroy',[App\Http\Controllers\Akuntan\ExpenseController::class, 'destroy']);
+  });
+
   Route::prefix('profile')->group(function() {
     Route::get('/',[App\Http\Controllers\Akuntan\ProfileController::class, 'index']);
     Route::post('update',[App\Http\Controllers\Akuntan\ProfileController::class, 'update']);

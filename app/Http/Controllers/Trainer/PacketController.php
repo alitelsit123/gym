@@ -28,6 +28,7 @@ class PacketController extends Controller
           'price' => $request->price,
           'description' => $request->description,
           'duration' => $request->duration,
+          'meet_count' => $request->meet_count,
           'trainer_id' => auth()->user()->id
         ]);
         $packet->code = 'PK-'.strtoupper(uniqid());
@@ -74,6 +75,7 @@ class PacketController extends Controller
           'price' => $request->price,
           'description' => $request->description,
           'duration' => $request->duration,
+          'meet_count' => $request->meet_count,
           'trainer_id' => auth()->user()->id
         ]);
         if (!$existingPacket->code) {

@@ -85,6 +85,12 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('akuntan/beban')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Beban
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link has-arrow " href="{{url('akuntan/membership')}}">
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Membership
             </a>
@@ -95,6 +101,7 @@
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Toko
             </a>
           </li>
+
           <li class="nav-item">
             <a class="nav-link has-arrow " href="{{url('akuntan/broadcast')}}">
               <i data-feather="home" class="nav-icon icon-xs me-2"></i> Broadcast Notifikasi
