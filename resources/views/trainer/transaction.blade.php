@@ -36,7 +36,7 @@
           <td>Rp. {{ number_format($row->packet->price) }}</td>
           <td>{{$row->duration}} Hari</td>
           <td>
-            @if($row->status == 'approve')
+            @if($row->status == 'approve' || $row->status == 'expired')
             <div class="badge bg-success">Sudah diverifikasi</div>
             @elseif ($row->payment_type == 'transfer')
             <a href="{{url('trainer/approved_payment_packet?id='.$row->id)}}" onclick="return confirm('Approve Transaksi ?')" class="btn btn-sm btn-success">Approve</a>

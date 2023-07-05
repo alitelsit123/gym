@@ -50,6 +50,7 @@ Route::prefix('trainer')->middleware('auth.role')->group(function() {
 
   Route::prefix('member')->group(function() {
     Route::get('/',[App\Http\Controllers\Trainer\MemberController::class, 'index']);
+    Route::get('/destroy_member/{id}',[App\Http\Controllers\Trainer\MemberController::class, 'destroyMember']);
 
     Route::get('/schedule-nutrition/{id}',[App\Http\Controllers\Trainer\MemberController::class, 'scheduleNutrition']);
     Route::post('/store_nutrition',[App\Http\Controllers\Trainer\MemberController::class, 'storeNutrition']);

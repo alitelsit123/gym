@@ -33,7 +33,7 @@ $packets = \App\Models\Packet::all();
                   <tr>
                     <th>Member</th>
                     <th>Sisa</th>
-                    <th>Nutrisi</th>
+                    <th>Jadwal</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@ $packets = \App\Models\Packet::all();
                     </td>
                     <td>
                       @if (($row->packet->meet_count - $row->absent()->count()) <= 0)
-                      <a class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menyelesaikan latihan ?')">Selesai latihan</a>
+                      <a class="btn btn-sm btn-danger" href="{{url('trainer/member/destroy_member/'.$row->id)}}" onclick="return confirm('Yakin ingin menyelesaikan latihan ?')">Selesai latihan</a>
                       @else
                       <a class="btn btn-sm btn-primary mb-2" target="_blank" href="{{url('trainer/member/schedule-nutrition/'.$row->id)}}">Lihat Jadwal Nutrisi</a>
                       <hr />

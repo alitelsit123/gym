@@ -72,6 +72,12 @@ class MemberController extends Controller
     Scheduleexercise::whereId(request('schedule_id'))->update($validatedData);
     return back()->with(['success' => 'Berhasil update jadwal.']);
   }
+  public function destroyMember($id) {
+    $t = TrainerMember::findOrFail($id);
+    $t->status = 'expired';
+    $t->save();
+    return back()->with(['success' => 'Berhasil mengeluarkan member.']);
+  }
   public function destroyexercise() {
     Scheduleexercise::whereId(request('id'))->delete();
     return back()->with(['success' => 'Berhasil hapus jadwal.']);
