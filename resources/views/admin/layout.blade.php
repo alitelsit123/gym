@@ -114,6 +114,22 @@
             </a>
           </li>
 
+
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url('admin/transaction')}}">
+              <i data-feather="git-pull-request" class="nav-icon icon-xs me-2">
+              </i> Transaksi
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link has-arrow " href="{{url(auth()->user()->role.'/chat')}}">
+              <i data-feather="home" class="nav-icon icon-xs me-2"></i> Chat
+            </a>
+          </li>
+
+
           {{-- <!-- Nav item -->
           <li class="nav-item">
             <div class="navbar-heading">Layouts & Pages</div>
@@ -302,12 +318,6 @@
               </i> Changelog
             </a>
           </li> --}}
-          <li class="nav-item">
-            <a class="nav-link has-arrow " href="{{url('admin/transaction')}}">
-              <i data-feather="git-pull-request" class="nav-icon icon-xs me-2">
-              </i> Transaksi
-            </a>
-          </li>
           {{-- <li class="nav-item">
             <form action="{{url('logout')}}" method="post" id="logout"></form>
             <a class="nav-link has-arrow " href="#" onclick="$('#logout').submit()">

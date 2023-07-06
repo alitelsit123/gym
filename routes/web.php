@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
   $role = auth()->user()->role;
   switch ($role) {
@@ -146,6 +145,10 @@ Route::prefix('admin')->middleware('auth.role')->group(function() {
     Route::post('store_type',[App\Http\Controllers\BroadcastController::class, 'storeType']);
   });
 
+  Route::prefix('chat')->group(function() {
+    Route::get('/',[App\Http\Controllers\ChatController::class, 'index']);
+  });
+
 });
 
 Route::prefix('akuntan')->middleware('auth.role')->group(function() {
@@ -232,6 +235,9 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
   });
 
 });
+
+Route::post('send_chat',[App\Http\Controllers\ChatController::class, 'send']);
+
 
 Route::get('notification/{id}', function($id) {
   \App\Models\User::findOrFail($id)->notifications->markAsRead();

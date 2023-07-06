@@ -30,7 +30,7 @@ $memberships = \App\Models\Membership::has('type')->whereStatus('pending')->late
       </td>
       <td>{{$row->type->name}}</td>
       <td>Rp. {{ number_format($row->type->price) }}</td>
-      {{-- <td>{{$row->duration}} {{$row->durationTypeLocal()}}</td> --}}
+      <td>{{$row->duration}} {{$row->durationTypeLocal()}}</td>
       <td>
         @if ($row->payment_type == 'transfer')
         <a href="{{url('akuntan/approved_payment?id='.$row->id)}}" onclick="return confirm('Approve Transaksi ?')" class="btn btn-sm btn-success">Approve</a>
