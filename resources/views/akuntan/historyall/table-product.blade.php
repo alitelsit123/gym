@@ -1,5 +1,5 @@
 @php
-$order = \App\Models\Order::where('status', 'pending')->get();
+$order = \App\Models\Order::all();
 // \App\Models\Order::query()->update(['status' => 'pending']);
 @endphp
 <table class="table table-centered text-nowrap mb-0">
@@ -19,7 +19,7 @@ $order = \App\Models\Order::where('status', 'pending')->get();
         <td>#{{$row->id}}</td>
         <td style="width:300px;">
           <div class="d-flex items-center">
-            @foreach ($row->details()->take(2)->get() as $rowDetail)
+            @foreach ($row->details()->has('product')->take(2)->get() as $rowDetail)
             <div>
               <div class="d-flex flex-column" style="margin-right:1rem;">
                 <img src="{{asset('storage/product/'.$rowDetail->product->image)}}" alt="" srcset="" style="width: 50px;height: auto;" />
@@ -28,7 +28,7 @@ $order = \App\Models\Order::where('status', 'pending')->get();
             </div>
             @endforeach
           </div>
-          @if ($row->details->count() > 2)
+          @if ($row->details()->has('product')->count() > 2)
           <button type="button" class="btn btn-sm btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}" style="display: block;">+ {{$row->details->count() - 2}} Produk</button>
           <!-- Modal -->
           <div class="modal fade" id="exampleModal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
