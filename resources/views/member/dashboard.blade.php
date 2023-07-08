@@ -100,7 +100,7 @@
           @endforelse
         </div>
 
-        <h4 class="my-3 mt-4">Jadwal Latihan</h4>
+        <h4 class="my-3 mt-4">Jadwal Latihan minggu ini</h4>
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
         $exercises = \App\Models\ScheduleExercise::has('packet')->whereUser_id(auth()->id())->get();
@@ -112,7 +112,7 @@
               <thead>
                 <tr>
                   <th>#Paket</th>
-                  <th>Hari</th>
+                  <th>Hari & Tanggal</th>
                   <th>Latihan</th>
                   <th style="width: 150px;">#</th>
                 </tr>
@@ -125,7 +125,11 @@
                 @endphp
                 <tr>
                   <td>{{$row->packet->title}}</td>
-                  <td>{{$dIso}}</td>
+                  @php
+                  $startOfWeek = \Carbon\Carbon::now()->startOfWeek()->subDays(1);
+                  $dIsos = $startOfWeek->addDays($row->daym == 0 ? 7:$row->daym)->locale('id');
+                  @endphp
+                  <td>{{$dIsos->isoFormat('dddd, MMMM YYYY')}}</td>
                   @php
                   $daysEx[] = $dIso;
                   @endphp

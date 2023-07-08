@@ -30,4 +30,11 @@ class TransactionController extends Controller
   public function invoice($model,$type) {
     return view('trainer.invoice',compact('model','type'));
   }
+  public function destroy()
+  {
+    $id = request('id');
+    $membershipType = TrainerMember::findOrFail($id);
+    $membershipType->delete();
+    return redirect()->back()->with('success', 'Berhasil.');
+  }
 }

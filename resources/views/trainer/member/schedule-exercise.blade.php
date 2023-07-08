@@ -56,7 +56,7 @@ $schedule = \App\Models\ScheduleExercise::whereTrainer_member_id($member->id)->g
         <tr>
             <th scope="col">Hari</th>
             <th scope="col">Keterangan</th>
-            <th scope="col">Jadwal Minggu ini</th>
+            <th scope="col">Tanggal</th>
             <th scope="col">#</th>
         </tr>
       </thead>

@@ -86,6 +86,7 @@ Route::prefix('trainer')->middleware('auth.role')->group(function() {
 
   Route::prefix('transaction')->group(function() {
     Route::get('/',[App\Http\Controllers\Trainer\TransactionController::class, 'index']);
+    Route::get('destroy',[App\Http\Controllers\Trainer\TransactionController::class, 'destroy']);
   });
 
   Route::prefix('profile')->group(function() {

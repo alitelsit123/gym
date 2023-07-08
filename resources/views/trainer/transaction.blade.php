@@ -17,7 +17,7 @@
             <th scope="col">Paket</th>
             <th scope="col">Tanggal Langganan</th>
             <th scope="col">EOT</th>
-            <th scope="col">Nama Membership</th>
+            <th scope="col">Nama Subscriber</th>
             <th scope="col">Harga</th>
             <th scope="col">Durasi</th>
             <th scope="col">#</th>
@@ -39,7 +39,7 @@
             @if($row->status == 'approve' || $row->status == 'expired')
             <div class="badge bg-success">Sudah diverifikasi</div>
             @elseif ($row->payment_type == 'transfer')
-            <a href="{{url('trainer/approved_payment_packet?id='.$row->id)}}" onclick="return confirm('Approve Transaksi ?')" class="btn btn-sm btn-success">Approve</a>
+            <a href="{{url('trainer/approved_payment_packet?id='.$row->id)}}" onclick="return confirm('Approve Transaksi ?')" class="btn btn-sm btn-success" style="display: block;">Approve</a>
             @else
             <button type="button" class="btn btn-sm btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}">Bayar Tunai</button>
             <!-- Modal -->
@@ -103,6 +103,10 @@
             </div>
 
             @endif
+            <!-- Button trigger modal -->
+            <a href="{{url('trainer/transaction/destroy')}}?id={{$row->id}}" class="btn btn-danger btn-sm btn-block mt-2" style="display: block;" onclick="return confirm('Yakin ingin hapus ?');">
+              Hapus
+            </a>
           </td>
         </tr>
         @endforeach
