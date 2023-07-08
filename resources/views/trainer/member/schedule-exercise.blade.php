@@ -56,7 +56,7 @@ $schedule = \App\Models\ScheduleExercise::whereTrainer_member_id($member->id)->g
         <tr>
             <th scope="col">Hari</th>
             <th scope="col">Keterangan</th>
-            <th scope="col">Tipe</th>
+            <th scope="col">Jadwal Minggu ini</th>
             <th scope="col">#</th>
         </tr>
       </thead>
@@ -72,7 +72,11 @@ $schedule = \App\Models\ScheduleExercise::whereTrainer_member_id($member->id)->g
             {{$startOfWeek->subDays(1)->addDays($row->daym)->locale('id')->isoFormat('dddd')}}
           </th>
           <td>{{$row->description}}</td>
-          <td>{{$row->type}}</td>
+          @php
+          $startOfWeek = \Carbon\Carbon::now()->startOfWeek()->subDays(1);
+          $dIso = $startOfWeek->addDays($row->daym == 0 ? 7:$row->daym)->locale('id');
+          @endphp
+          <td>{{$dIso->isoFormat('DD, MMMM YYYY')}}</td>
           <td>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}">

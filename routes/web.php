@@ -101,6 +101,10 @@ Route::prefix('trainer')->middleware('auth.role')->group(function() {
     Route::post('store_type',[App\Http\Controllers\BroadcastController::class, 'storeType']);
   });
 
+  Route::prefix('chat')->group(function() {
+    Route::get('/',[App\Http\Controllers\ChatController::class, 'index']);
+  });
+
 });
 
 Route::prefix('admin')->middleware('auth.role')->group(function() {
@@ -192,6 +196,10 @@ Route::prefix('akuntan')->middleware('auth.role')->group(function() {
     Route::post('store_type',[App\Http\Controllers\Akuntan\BroadcastController::class, 'storeType']);
   });
 
+  Route::prefix('chat')->group(function() {
+    Route::get('/',[App\Http\Controllers\ChatController::class, 'index']);
+  });
+
 });
 
 Route::prefix('member')->middleware('auth.role')->group(function() {
@@ -237,6 +245,14 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
 });
 
 Route::post('send_chat',[App\Http\Controllers\ChatController::class, 'send']);
+Route::get('destroy_chat/{id}',[App\Http\Controllers\ChatController::class, 'destroy']);
+
+Route::prefix('user')->group(function() {
+  Route::get('/',[App\Http\Controllers\UserController::class, 'index']);
+  Route::post('store',[App\Http\Controllers\UserController::class, 'store']);
+  Route::get('destroy',[App\Http\Controllers\UserController::class, 'destroy']);
+  Route::post('update/{id}',[App\Http\Controllers\UserController::class, 'update']);
+});
 
 
 Route::get('notification/{id}', function($id) {

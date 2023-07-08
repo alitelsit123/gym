@@ -104,7 +104,6 @@
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
         $exercises = \App\Models\ScheduleExercise::has('packet')->whereUser_id(auth()->id())->get();
-        $startOfWeek = \Carbon\Carbon::now()->startOfWeek()->subDays(1);
         $daysEx = [];
         @endphp
         <div class="card">
@@ -121,7 +120,8 @@
               <tbody>
                 @forelse ($exercises as $row)
                 @php
-                $dIso = $startOfWeek->addDays($row->daym)->locale('id')->isoFormat('dddd');
+                $startOfWeek = \Carbon\Carbon::now()->startOfWeek()->subDays(1);
+                $dIso = $startOfWeek->addDays($row->daym == 0 ? 7:$row->daym)->locale('id')->isoFormat('dddd');
                 @endphp
                 <tr>
                   <td>{{$row->packet->title}}</td>
