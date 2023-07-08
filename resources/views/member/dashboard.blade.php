@@ -119,7 +119,7 @@
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
         $exercises = \App\Models\ScheduleExercise::has('packet')->whereHas('member', function($query) {
-          $query->whereMember_id(auth()->id())->where('status', 'approved');
+          $query->whereMember_id(auth()->id())->where('status', 'approve');
         })->whereUser_id(auth()->id())->get();
         $daysEx = [];
         @endphp
