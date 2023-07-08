@@ -14,4 +14,7 @@ class ScheduleExercise extends Model
     public function packet() {
       return $this->belongsTo('App\Models\Packet', 'packet_id');
     }
+    public function member() {
+      return $this->belongsTo('App\Models\TrainerMember', 'trainer_member_id');
+    }
 }

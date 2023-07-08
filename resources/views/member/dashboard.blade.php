@@ -17,7 +17,20 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Image" class="rounded-circle bg-light avatar avatar-xl">
                 <div class="ms-md-4 mt-3 mt-md-0 lh-1">
                   <h3 class="text-white mb-0">Hallo, {{auth()->user()->name}}</h3>
-                  <small class="text-white">Selamat Pagi</small>
+                  @php
+                  $currentTime = \Carbon\Carbon::now()->locale('id')->addHours(7);
+
+                  $greeting = '';
+
+                  if ($currentTime->hour >= 0 && $currentTime->hour < 12) {
+                      $greeting .= 'Selamat pagi';
+                  } elseif ($currentTime->hour >= 12 && $currentTime->hour < 17) {
+                      $greeting .= 'Selamat siang';
+                  } else {
+                      $greeting .= 'Selamat malam';
+                  }
+                  @endphp
+                  <small class="text-white">{{$greeting}}</small>
                 </div>
               </div>
               <div class="d-none d-lg-block">
@@ -70,7 +83,9 @@
         </div>
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
-        $nutritions = \App\Models\ScheduleNutrition::whereUser_id(auth()->id())->get();
+        $nutritions = \App\Models\ScheduleNutrition::whereHas('member', function($query) {
+          $query->whereMember_id(auth()->id());
+        })->whereUser_id(auth()->id())->get();
         @endphp
         <h4 class="mb-3">Jadwal Nutrisi</h4>
         <div class="row">
@@ -103,7 +118,9 @@
         <h4 class="my-3 mt-4">Jadwal Latihan minggu ini</h4>
         @php
         $currentDay = \Carbon\Carbon::now()->dayOfWeek;
-        $exercises = \App\Models\ScheduleExercise::has('packet')->whereUser_id(auth()->id())->get();
+        $exercises = \App\Models\ScheduleExercise::has('packet')->whereHas('member', function($query) {
+          $query->whereMember_id(auth()->id());
+        })->whereUser_id(auth()->id())->get();
         $daysEx = [];
         @endphp
         <div class="card">

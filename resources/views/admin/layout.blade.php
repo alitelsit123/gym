@@ -129,12 +129,6 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link has-arrow " href="{{url('/user')}}">
-              <i data-feather="home" class="nav-icon icon-xs me-2"></i> View User
-            </a>
-          </li>
-
 
 
           {{-- <!-- Nav item -->
