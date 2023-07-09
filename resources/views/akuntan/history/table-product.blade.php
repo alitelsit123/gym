@@ -19,14 +19,16 @@ $order = \App\Models\Order::where('status', 'pending')->get();
         <td>#{{$row->id}}</td>
         <td style="width:300px;">
           <div class="d-flex items-center">
-            @foreach ($row->details()->take(2)->get() as $rowDetail)
+            @forelse ($row->details()->take(2)->get() as $rowDetail)
             <div>
               <div class="d-flex flex-column" style="margin-right:1rem;">
                 <img src="{{asset('storage/product/'.$rowDetail->product->image)}}" alt="" srcset="" style="width: 50px;height: auto;" />
                 <div>{{Str::limit($rowDetail->product->name,50,'...')}} x{{$rowDetail->quantity}}</div>
               </div>
             </div>
-            @endforeach
+            @empty
+            (Produk dihapus)
+            @endforelse
           </div>
           @if ($row->details->count() > 2)
           <button type="button" class="btn btn-sm btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}" style="display: block;">+ {{$row->details->count() - 2}} Produk</button>
