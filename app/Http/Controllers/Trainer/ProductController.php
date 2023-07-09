@@ -48,7 +48,8 @@ class ProductController extends Controller
   }
   public function updateCart() {
     foreach (request('quantity') as $id => $quantity) {
-      OrderDetail::whereId($id)->update(['quantity' => $quantity]);
+      $d = OrderDetail::findOrFail($id);
+      OrderDetail::whereId($id)->update(['quantity' => $quantity,'sub_amount' => $quantity * $d->product->price]);
     }
     return back()->with(['success' => 'Keranjang diupdate.']);
   }
@@ -71,13 +72,17 @@ class ProductController extends Controller
 
       // Store the image in the specified disk and directory
       Storage::disk($disk)->putFileAs('/', $uploadedImage, '/product_payment/'.$imageName);
-      $order->e_date = now();
-      $order->gross_amount = $order->details()->sum('sub_amount');
       $order->payment_eot = $imageName;
-      $order->status = 'pending';
-      $order->save();
     }
-    return back()->with(['success' => 'Pembayaran berhasil, tunggu verifikasi admin.']);
+    $order->e_date = now();
+    $order->gross_amount = $order->details()->sum('sub_amount');
+    $order->status = 'pending';
+    $order->payment_type = $request->payment_type;
+    $order->save();
+    foreach (\App\Models\User::whereRole('akuntan')->get() as $rowAkuntan) {
+      $rowAkuntan->notify(new \App\Notifications\ProductNotification(['model' => 'Order', 'target' => $order],'Transaksi produk baru #'.$order->id));
+    }
+    return back()->with(['success' => 'Pembayaran berhasil, tunggu di konfirmasi.']);
   }
   public function deleteCart($id) {
     OrderDetail::whereId($id)->delete();

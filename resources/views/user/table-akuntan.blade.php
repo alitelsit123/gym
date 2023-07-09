@@ -24,7 +24,14 @@ $users = \App\Models\User::whereRole('akuntan')->where('email', '<>', auth()->us
         <div class="badge bg-info">{{$row->role}}</div>
       </td>
       <td>{{$row->phone}}</td>
-      <td></td>
+      <td>
+        @if ($row->photo)
+        <img alt="avatar" src="{{asset('storage/profile/'.$row->photo)}}" class="rounded-circle" style="width:40px;height:40px;" />
+
+        @else
+        {{-- <img alt="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="rounded-circle" /> --}}
+        @endif
+      </td>
       {{-- <td>
         <select name="s{{$row->id}}" id="" class="form-control">
           <option value="">Belum punya membership</option>

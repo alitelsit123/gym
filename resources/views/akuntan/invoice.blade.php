@@ -33,7 +33,7 @@
           @foreach ($model->details as $row)
           <div class="row">
             <div class="col-xl-10">
-              <p><strong>({{$row->product->category}})</strong> {{$row->product->name}}</p>
+              <p><strong>{{$row->product->category}} - </strong> {{$row->product->name}} (x{{$row->quantity}})</p>
             </div>
             <div class="col-xl-2">
               <p class="float-end">

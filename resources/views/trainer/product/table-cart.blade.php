@@ -7,8 +7,8 @@ $order = \App\Models\Order::whereStatus('cart')->whereUser_id(auth()->id())->fir
 
       <th>Gambar</th>
       <th>Produk</th>
-      <th style="width: 200px;">Jumlah</th>
       <th>Sub Harga</th>
+      <th style="width: 200px;">Jumlah</th>
       <th></th>
     </tr>
   </thead>
@@ -20,7 +20,7 @@ $order = \App\Models\Order::whereStatus('cart')->whereUser_id(auth()->id())->fir
             <img src="{{asset('storage/product/'.$row->product->image)}}" alt="" srcset="" style="width: 100px;height: auto;"> <br />
           </td>
           <td><strong>{{$row->product->name}}</strong></td>
-          <td>Rp. {{number_format($row->sub_amount)}}</td>
+          <td>Rp. {{number_format($row->product->price)}}</td>
           <td style="width: 200px;"><input type="number" name="quantity[{{$row->id}}]" id="" class="form-control" value="{{$row->quantity}}" /></td>
           <td>
             <a href="{{url('trainer/product/delete_cart/'.$row->id)}}" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip" data-template="trashOne">
