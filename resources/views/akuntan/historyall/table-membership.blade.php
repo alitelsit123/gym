@@ -24,8 +24,8 @@ $memberships = \App\Models\Membership::has('type')->latest()->get();
       <td>
         <img src="{{asset('storage/eot/'.$row->payment_eot)}}" alt="" srcset="" style="width:50px;height:auto;" />
       </td>
-      <td>{{$row->type->name}}</td>
-      <td>{{ $row->type->{'price_'.($row->duration_type ?? 'daily')} }}</td>
+      <td>{{$row->member->name}}</td>
+      <td>Rp. {{ number_format($row->type->price) }}</td>
       <td>{{$row->duration}} {{$row->durationTypeLocal()}}</td>
       <td>
         @if ($row->status == 'approve' || $row->status == 'settlement')

@@ -28,7 +28,7 @@ $memberships = \App\Models\Membership::has('type')->whereStatus('pending')->late
         <img src="{{asset('storage/eot/'.$row->payment_eot)}}" alt="" srcset="" style="width:50px;height:auto;" />
         @endif
       </td>
-      <td>{{$row->type->name}}</td>
+      <td>{{$row->member->name}}</td>
       <td>Rp. {{ number_format($row->type->price) }}</td>
       <td>{{$row->duration}} {{$row->durationTypeLocal()}}</td>
       <td>
