@@ -36,6 +36,11 @@ Route::post('print', function() {
   $pdf = PDF::loadview('print', compact('d'));
   return $pdf->download('membership.pdf');
 });
+Route::get('print', function() {
+  $pdf = PDF::loadview('print');
+  return $pdf->download('membership.pdf');
+  // return view('print');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -59,6 +59,9 @@ class User extends Authenticatable
     public function trainerMembers() {
       return $this->hasMany('App\Models\TrainerMember', 'trainer_id');
     }
+    public function packetMembers() {
+      return $this->hasMany('App\Models\TrainerMember', 'member_id');
+    }
     public function memberships() {
       return $this->hasMany('App\Models\Membership', 'user_id');
     }

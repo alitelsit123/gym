@@ -1,6 +1,7 @@
 @extends('member.layout')
 
 @section('body')
+  <form action="{{url('print')}}" method="post" target="_blank" id="ff"></form>
   <div class="app-content-area">
     <div class="mx-n4"></div>
       @php
@@ -13,24 +14,32 @@
         <div class="row mb-5 ">
           <div class="col-lg-12 col-md-12 col-12">
             <div class="p-6 d-lg-flex justify-content-between align-items-center ">
-              <div class="d-md-flex align-items-center">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Image" class="rounded-circle bg-light avatar avatar-xl">
-                <div class="ms-md-4 mt-3 mt-md-0 lh-1">
-                  <h3 class="text-white mb-0">Hallo, {{auth()->user()->name}}</h3>
-                  @php
-                  $currentTime = \Carbon\Carbon::now()->locale('id')->addHours(7);
+              <div class="d-md-flex align-items-center w-100">
+                @if (auth()->user()->photo)
+                  <img alt="avatar" src="{{asset('storage/profile/'.auth()->user()->photo)}}" class="rounded-circle avatar-xl" />
+                  @else
+                  <img alt="avatar" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="rounded-circle avatar-xl" />
+                  @endif
+                <div class="ms-md-4 mt-3 mt-md-0 lh-1 w-100" style="display: flex; align-items: center; justify-content:space-between;">
+                  <div>
+                    <h3 class="text-white mb-0">Hallo, {{auth()->user()->name}}</h3>
+                    @php
+                    $currentTime = \Carbon\Carbon::now()->locale('id')->addHours(7);
 
-                  $greeting = '';
+                    $greeting = '';
 
-                  if ($currentTime->hour >= 0 && $currentTime->hour < 12) {
-                      $greeting .= 'Selamat pagi';
-                  } elseif ($currentTime->hour >= 12 && $currentTime->hour < 17) {
-                      $greeting .= 'Selamat siang';
-                  } else {
-                      $greeting .= 'Selamat malam';
-                  }
-                  @endphp
-                  <small class="text-white">{{$greeting}}</small>
+                    if ($currentTime->hour >= 0 && $currentTime->hour < 12) {
+                        $greeting .= 'Selamat pagi';
+                    } elseif ($currentTime->hour >= 12 && $currentTime->hour < 17) {
+                        $greeting .= 'Selamat siang';
+                    } else {
+                        $greeting .= 'Selamat malam';
+                    }
+                    @endphp
+                    <small class="text-white">{{$greeting}}</small>
+                  </div>
+                  {{-- <button class="btn btn-info btn-prints" type="button">Cetak Kartu Anggota</button> --}}
+                  <a href="{{url('print')}}" class="btn btn-info" target="_blank">Cetak Kartu Anggota</a>
                 </div>
               </div>
               <div class="d-none d-lg-block">
@@ -41,9 +50,7 @@
           </div>
         </div>
       </div>
-      <form action="{{url('print')}}" method="post" target="_blank" id="ff">
-        <textarea style="display: none;" name="d" id=""></textarea>
-      </form>
+
       <div>
         <h4 class="mb-3">Membership</h4>
         @php
@@ -231,16 +238,12 @@
     // printWindow.document.close();
     // printWindow.print();
     // console.log(this)
-    $('#ff textarea').val(e.target.toString()).text(e.target.toString())
-    $('#ff').submit()
+    // $('#ff textarea').val(e.target.toString()).text(e.target.toString())
+    // $('#ff').submit()
 }
 
   $(document).ready(function() {
-    $('.ccc').click(function() {
-      const ccs = $(this).clone()
-      ccs.css('width','255px')
-      // console.log(ccs)
-      $('#ff textarea').val(ccs.html())
+    $('.btn-prints').click(function() {
       $('#ff').submit()
     })
   })
