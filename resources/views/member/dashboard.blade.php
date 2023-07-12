@@ -41,6 +41,9 @@
           </div>
         </div>
       </div>
+      <form action="{{url('print')}}" method="post" target="_blank" id="ff">
+        <textarea style="display: none;" name="d" id=""></textarea>
+      </form>
       <div>
         <h4 class="mb-3">Membership</h4>
         @php
@@ -49,7 +52,7 @@
         <div class="row mb-4">
           @foreach ($userMemberships as $row)
           <div class="col-md-4">
-            <div class="card bg-primary card-outlined">
+            <div class="card bg-primary card-outlined ccc" style="cursor: pointer;" data-id="r-{{$row->id}}" id="r-{{$row->id}}">
               <div class="card-body">
                 <h4 class="btn-block font-weight-bold text-white"><strong>{{$row->type->name}}</strong> {{$row->type->class}}</h4>
                 @php
@@ -215,4 +218,34 @@
 
     </div>
   </div>
+  <script>
+    function printSection(e) {
+    // var sectionHTML = document.getElementById(id).innerHTML;
+    // var printWindow = window.open('', '_blank');
+    // printWindow.document.open();
+    // printWindow.document.write('<html><head><title>Print Section</title>');
+    // printWindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">');
+    // printWindow.document.write('</head><body>');
+    // printWindow.document.write(sectionHTML);
+    // printWindow.document.write('</body></html>');
+    // printWindow.document.close();
+    // printWindow.print();
+    // console.log(this)
+    $('#ff textarea').val(e.target.toString()).text(e.target.toString())
+    $('#ff').submit()
+}
+
+  $(document).ready(function() {
+    $('.ccc').click(function() {
+      const ccs = $(this).clone()
+      ccs.css('width','255px')
+      // console.log(ccs)
+      $('#ff textarea').val(ccs.html())
+      $('#ff').submit()
+    })
+  })
+
+
+
+  </script>
 @endsection

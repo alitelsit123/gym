@@ -31,6 +31,12 @@ Route::get('/', function () {
   }
 })->middleware('auth');
 
+Route::post('print', function() {
+  $d = request('d');
+  $pdf = PDF::loadview('print', compact('d'));
+  return $pdf->download('membership.pdf');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
