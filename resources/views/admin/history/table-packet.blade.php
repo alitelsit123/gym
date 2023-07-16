@@ -1,5 +1,9 @@
 @php
-$packets = \App\Models\Expense::get();
+$packets = \App\Models\Expense::when(request('range'), function($query) use ($startDate,$endDate) {
+  $query->whereBetween('created_at',[$startDate,$endDate]);
+})->get();
+$total = 0;
+
 @endphp
 <!-- basic table -->
 <table class="table table-stripped mt-2">
@@ -16,6 +20,9 @@ $packets = \App\Models\Expense::get();
   </thead>
   <tbody>
     @foreach ($packets as $k => $row)
+    @php
+    $total = $total+$row->gross_amount
+    @endphp
     <tr>
       {{-- <th scope="row">{{$row->code}}</th> --}}
       <td>
@@ -31,5 +38,10 @@ $packets = \App\Models\Expense::get();
       <td>{{$row->description}}</td>
     </tr>
     @endforeach
+    <tr>
+      <td>
+        Total Pengeluaran: <strong>Rp. {{number_format($total)}}</strong>
+      </td>
+    </tr>
   </tbody>
 </table>

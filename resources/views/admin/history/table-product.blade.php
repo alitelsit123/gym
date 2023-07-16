@@ -1,5 +1,9 @@
 @php
-$order = \App\Models\Order::get();
+$order = \App\Models\Order::when(request('range'), function($query) use ($startDate,$endDate) {
+  $query->whereDate('created_at', '>=',$startDate)->whereDate('created_at', '<=', $endDate);
+})->get();
+$total = 0;
+
 // \App\Models\Order::query()->update(['status' => 'pending']);
 @endphp
 <table class="table table-centered text-nowrap mb-0">
@@ -15,6 +19,9 @@ $order = \App\Models\Order::get();
   </thead>
   <tbody>
     @foreach ($order as $row)
+    @php
+    $total = $total+$row->gross_amount
+    @endphp
       <tr>
         <td>#{{$row->id}}</td>
         <td style="width:300px;">
@@ -104,5 +111,10 @@ $order = \App\Models\Order::get();
 
       </tr>
     @endforeach
+    <tr>
+      <td>
+        Total Pendapatan: <strong>Rp. {{number_format($total)}}</strong>
+      </td>
+    </tr>
   </tbody>
 </table>

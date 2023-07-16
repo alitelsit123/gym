@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/forgot-password', function () {
+  return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
 Route::get('/', function () {
   $role = auth()->user()->role;
   switch ($role) {
@@ -170,9 +175,12 @@ Route::prefix('admin')->middleware('auth.role')->group(function() {
 Route::prefix('akuntan')->middleware('auth.role')->group(function() {
   Route::get('/', [App\Http\Controllers\Akuntan\TransactionController::class, 'index']);
   Route::get('/approved_payment', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPayment']);
+  Route::get('/approved_payment_other', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentOther']);
   Route::get('/approved_payment_packet', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentPacket']);
   Route::get('/approved_payment_product', [App\Http\Controllers\Akuntan\TransactionController::class, 'approvedPaymentProduct']);
   Route::get('invoice', [App\Http\Controllers\Akuntan\TransactionController::class, 'invoice']);
+
+  Route::post('store_tx_manual',[App\Http\Controllers\Akuntan\TransactionController::class, 'storeTxManual']);
 
   Route::prefix('beban')->group(function() {
     Route::get('/',[App\Http\Controllers\Akuntan\ExpenseController::class, 'index']);

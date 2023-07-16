@@ -1,5 +1,8 @@
 @php
-$memberships = \App\Models\Membership::has('type')->latest()->get();
+$memberships = \App\Models\Membership::when(request('range') && $startDate && $endDate, function($query) use ($startDate,$endDate) {
+  $query->whereBetween('created_at',[$startDate,$endDate]);
+})->has('type')->latest()->get();
+$total = 0;
 @endphp
 <!-- basic table -->
 <table class="table table-stripped mt-2">
@@ -17,6 +20,9 @@ $memberships = \App\Models\Membership::has('type')->latest()->get();
   </thead>
   <tbody>
     @foreach ($memberships as $k => $row)
+    @php
+    $total = $total+$row->type->price
+    @endphp
     <tr>
       <th scope="row">{{$k+1}}</th>
       <th scope="row">{{$row->type->name}}</th>
@@ -36,6 +42,11 @@ $memberships = \App\Models\Membership::has('type')->latest()->get();
       </td>
     </tr>
     @endforeach
+    <tr>
+      <td>
+        Total Pendapatan: <strong>Rp. {{number_format($total)}}</strong>
+      </td>
+    </tr>
   </tbody>
 </table>
 <!-- basic table -->

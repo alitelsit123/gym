@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Print Section</title>
+    <title>Kartu Anggota</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" media='screen,print'>
     <script src="{{url('/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <style>
@@ -92,6 +92,7 @@ table tr:nth-child(even) {
         </tr>
       </tbody>
     </table>
+    @if (auth()->user()->role == 'member')
     <div class="membership-info">
       <h4 class="section-title">Membership Information</h4>
       <table>
@@ -128,6 +129,7 @@ table tr:nth-child(even) {
         @endforeach
       </table>
     </div>
+    @endif
   </div>
 
 </body>

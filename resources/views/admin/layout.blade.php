@@ -43,6 +43,10 @@
   <script src="{{url('/assets/js/theme.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
   <title>MAHESA GYM & FITNESS</title>
 </head>
 
@@ -375,7 +379,11 @@
                 </div>
 
                 <ul class="list-unstyled">
-
+                  <li>
+                    <a class="dropdown-item" href="{{url('print')}}">
+                      Cetak Kartu Anggota
+                    </a>
+                  </li>
                   <li>
                     <a class="dropdown-item" href="{{url('admin/profile')}}">
                       Edit Profile

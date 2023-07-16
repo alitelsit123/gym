@@ -177,7 +177,11 @@
                 </div>
 
                 <ul class="list-unstyled">
-
+                  <li>
+                    <a class="dropdown-item" href="{{url('print')}}">
+                      Cetak Kartu Anggota
+                    </a>
+                  </li>
                   <li>
                     <a class="dropdown-item" href="{{url('akuntan/profile')}}">
                       Edit Profile
