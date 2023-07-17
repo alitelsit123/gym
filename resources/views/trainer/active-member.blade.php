@@ -2,14 +2,21 @@
 
 @section('body')
 @php
-$packets = \App\Models\Packet::all();
+$packets = \App\Models\Packet::whereTrainer_id(auth()->id())->get();
 @endphp
 <div class="container-fluid">
   <!-- javascript behavior vertical pills -->
   <div class="row">
-    <div class="col-3">
+    @if ($packets->count() == 0)
+    <div class="col-12">
+      <div class="alert alert-warning">
+      <strong>Informasi</strong> Anda belum memiliki paket, silahkan menambahkan data di halaman paket.
+    </div>
+    </div>
+    @endif
+    <div class="col-3" style="@if($packets->count() == 0) display:none; @endif">
       <div class="mb-2">
-        <strong>PAKET SAYA</strong>
+        <strong>MEMBER SAYA</strong>
       </div>
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         @foreach ($packets as $k => $row)
