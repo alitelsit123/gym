@@ -19,7 +19,7 @@ $total = 0;
 <table class="table table-stripped mt-2 tp">
   <thead>
     <tr>
-        {{-- <th scope="col">#</th> --}}
+        <th scope="col">Tanggal</th>
         <th scope="col">Nama</th>
         {{-- <th scope="col">Eot</th> --}}
         <th scope="col">Harga satuan</th>
@@ -34,7 +34,7 @@ $total = 0;
     $total = $total+$row->gross_amount
     @endphp
     <tr>
-      {{-- <th scope="row">{{$row->code}}</th> --}}
+      <th scope="row">{{$row->created_at->format('d, F Y')}}</th>
       <td>
         <div>{{$row->name}}</div>
       </td>

@@ -20,6 +20,7 @@ $total = 0;
   <thead class="table-light">
     <tr>
       <th style="width:150px;">#</th>
+      <th>Tanggal</th>
       <th>Produk</th>
       <th>Jumlah</th>
       <th>Total Harga</th>
@@ -34,6 +35,7 @@ $total = 0;
     @endphp
       <tr>
         <td style="width:150px;">#{{$row->id}}</td>
+        <td>{{$row->created_at->format('d, F Y')}}</td>
         <td style="width:300px;">
           <div class="d-flex items-center">
             @forelse ($row->details()->take(2)->get() as $rowDetail)

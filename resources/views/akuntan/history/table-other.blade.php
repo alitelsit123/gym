@@ -1,11 +1,14 @@
 @php
-$others = \App\Models\TransactionOther::whereStatus($status ?? 'pending')->latest()->get();
+$others = \App\Models\TransactionOther::where(function($query) {
+  $query->has('membershipType')->orHas('details');
+})->whereStatus($status ?? 'pending')->latest()->get();
 @endphp
 <!-- basic table -->
 <table class="table table-stripped mt-2">
   <thead>
     <tr>
         <th scope="col">#</th>
+        <th>Tanggal</th>
         <th scope="col">Nama</th>
         <th scope="col">Nomor HP</th>
         <th scope="col">EOT</th>
@@ -20,6 +23,7 @@ $others = \App\Models\TransactionOther::whereStatus($status ?? 'pending')->lates
     {{-- @dd($row->toArray()) --}}
     <tr>
       <th scope="row">{{$k+1}}</th>
+      <td>{{$row->created_at->format('d, F Y')}}</td>
       <th scope="row">{{$row->name}}</th>
       <th scope="row">{{$row->phone}}</th>
       {{-- <td>{{\Carbon\Carbon::parse($row->payment_date)->format('d, F Y')}}</td> --}}
@@ -89,7 +93,17 @@ $others = \App\Models\TransactionOther::whereStatus($status ?? 'pending')->lates
         @endif
       </td>
       <td>
-
+        @if ($row->type == 'membership')
+        <div class="badge bg-info">Total Rp. {{number_format($row->membershipType->price)}}</div>
+        @elseif($row->type == 'product')
+          @if ($row->details->count() > 0)
+          <div class="badge bg-info">Total Rp. {{number_format($row->details()->sum('sub_amount'))}}</div>
+          @endif
+          @if ($row->status == 'approve')
+          <div class="badge bg-info">Bayar Rp. {{number_format($row->gross_amount)}}</div><br />
+          <div class="badge bg-info">Kembalian Rp. {{number_format($row->payment_changes)}}</div>
+          @endif
+        @endif
       </td>
       <td>
         @if ($row->status == 'approve')

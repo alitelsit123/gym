@@ -6,6 +6,7 @@ $order = \App\Models\Order::all();
   <thead class="table-light">
     <tr>
       <th>#</th>
+      <th>Tanggal</th>
       <th>Produk</th>
       <th>Jumlah</th>
       <th>Total Harga</th>
@@ -17,6 +18,7 @@ $order = \App\Models\Order::all();
     @foreach ($order as $row)
       <tr>
         <td>#{{$row->id}}</td>
+        <td>{{$row->created_at->format('d, F Y')}}</td>
         <td style="width:300px;">
           <div class="d-flex items-center">
             @foreach ($row->details()->has('product')->take(2)->get() as $rowDetail)
