@@ -5,8 +5,18 @@ $packets = \App\Models\Expense::when(request('range'), function($query) use ($st
 $total = 0;
 
 @endphp
+<script>
+  $(document).ready(function() {
+    $('.tp').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
+  })
+</script>
 <!-- basic table -->
-<table class="table table-stripped mt-2">
+<table class="table table-stripped mt-2 tp">
   <thead>
     <tr>
         {{-- <th scope="col">#</th> --}}
@@ -38,10 +48,12 @@ $total = 0;
       <td>{{$row->description}}</td>
     </tr>
     @endforeach
-    <tr>
-      <td>
-        Total Pengeluaran: <strong>Rp. {{number_format($total)}}</strong>
-      </td>
-    </tr>
   </tbody>
+</table>
+<table>
+  <tr>
+    <td colspan="5">
+      Total Pengeluaran: <strong>Rp. {{number_format($total)}}</strong>
+    </td>
+  </tr>
 </table>

@@ -6,10 +6,20 @@ $total = 0;
 
 // \App\Models\Order::query()->update(['status' => 'pending']);
 @endphp
-<table class="table table-centered text-nowrap mb-0">
+<script>
+  $(document).ready(function() {
+    $('.tpp').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
+  })
+</script>
+<table class="table table-centered text-nowrap mb-0 tpp">
   <thead class="table-light">
     <tr>
-      <th>#</th>
+      <th style="width:150px;">#</th>
       <th>Produk</th>
       <th>Jumlah</th>
       <th>Total Harga</th>
@@ -23,7 +33,7 @@ $total = 0;
     $total = $total+$row->gross_amount
     @endphp
       <tr>
-        <td>#{{$row->id}}</td>
+        <td style="width:150px;">#{{$row->id}}</td>
         <td style="width:300px;">
           <div class="d-flex items-center">
             @forelse ($row->details()->take(2)->get() as $rowDetail)
@@ -111,10 +121,13 @@ $total = 0;
 
       </tr>
     @endforeach
-    <tr>
-      <td>
-        Total Pendapatan: <strong>Rp. {{number_format($total)}}</strong>
-      </td>
-    </tr>
+
   </tbody>
+</table>
+<table>
+  <tr>
+    <td colspan="6">
+      Total Pendapatan: <strong>Rp. {{number_format($total)}}</strong>
+    </td>
+  </tr>
 </table>

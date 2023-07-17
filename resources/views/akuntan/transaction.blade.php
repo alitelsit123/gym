@@ -58,7 +58,7 @@
                   <label for="" class="mb-1">Tipe Transaksi</label>
                   <select name="type" id="" class="form-control select-type" required>
                     <option value="">-- Pilih Tipe Transaksi --</option>
-                    <option value="membership">Membership</option>
+                    <option value="membership">Latihan</option>
                     <option value="product">Produk</option>
                     {{-- <option value="packet">Paket Trainer</option> --}}
                   </select>
@@ -83,7 +83,7 @@
                     <select name="membership_type" id="" class="form-control select">
                       <option value="">-- Pilih Tipe Membership --</option>
                       @foreach (\App\Models\MembershipType::all() as $rowMembership)
-                      <option value="{{$rowMembership->id}}">{{$rowMembership->name}} - {{$rowMembership->class}}</option>
+                      <option value="{{$rowMembership->id}}">{{$rowMembership->name}} - {{$rowMembership->class}} - ({{$rowMembership->duration}} Hari)</option>
                       @endforeach
                     </select>
                   </div>

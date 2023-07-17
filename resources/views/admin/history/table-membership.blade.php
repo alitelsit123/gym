@@ -4,8 +4,18 @@ $memberships = \App\Models\Membership::when(request('range') && $startDate && $e
 })->has('type')->latest()->get();
 $total = 0;
 @endphp
+<script>
+  $(document).ready(function() {
+    $('.tm').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
+  })
+</script>
 <!-- basic table -->
-<table class="table table-stripped mt-2">
+<table class="table table-stripped mt-2 tm">
   <thead>
     <tr>
         <th scope="col">#</th>
@@ -42,11 +52,15 @@ $total = 0;
       </td>
     </tr>
     @endforeach
-    <tr>
-      <td>
-        Total Pendapatan: <strong>Rp. {{number_format($total)}}</strong>
-      </td>
-    </tr>
+
   </tbody>
 </table>
 <!-- basic table -->
+
+<table>
+  <tr>
+    <td colspan="8">
+      Total Pendapatan: <strong>Rp. {{number_format($total)}}</strong>
+    </td>
+  </tr>
+</table>
