@@ -51,7 +51,7 @@ $total = 0;
       <td>{{$row->type}}</td>
       <td>
         @if ($row->type == 'membership')
-        <div class="badge bg-info">{{$row->membershipType->name}}</div>
+        <div class="badge bg-info">{{$row->membershipType->name ?? 'Data dihapus'}}</div>
         @endif
         @if ($row->type == 'product')
           <div class="d-flex items-center">
