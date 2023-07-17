@@ -32,7 +32,7 @@ $total = 0;
   <tbody>
     @foreach ($others as $k => $row)
     @php
-    $total = $total+(Str::ucfirst($row->type) == 'Membership' ? ($row->membershipType->price ?? 'Data dihapus'):(Str::ucfirst($row->type) == 'Product' ? ($row->details()->sum('sub_amount') > 0 ? $row->details()->sum('sub_amount') ?? 0:0):0));
+    $total = $total+(Str::ucfirst($row->type) == 'Membership' ? ($row->membershipType->price ?? 0):(Str::ucfirst($row->type) == 'Product' ? ($row->details()->sum('sub_amount') > 0 ? $row->details()->sum('sub_amount') ?? 0:0):0));
     @endphp
     {{-- @dd($row->toArray()) --}}
     <tr>
