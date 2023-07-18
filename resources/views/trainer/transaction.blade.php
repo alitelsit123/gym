@@ -7,7 +7,9 @@
       <h4>Transaksi</h4>
     </div>
     @php
-    $memberships = \App\Models\TrainerMember::has('packet')->latest()->get();
+    $memberships = \App\Models\TrainerMember::whereHas('packet', function($query) {
+      $query->whereTrainer_id(auth()->id());
+    })->latest()->get();
     @endphp
     <!-- basic table -->
     <table class="table table-stripped mt-2">
