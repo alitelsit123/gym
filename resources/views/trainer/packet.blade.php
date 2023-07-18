@@ -2,7 +2,7 @@
 
 @section('body')
 @php
-$packets = \App\Models\Packet::get();
+$packets = \App\Models\Packet::whereTrainer_id(auth()->id())->get();
 @endphp
 <div class="card">
   <div class="card-body">
