@@ -2,7 +2,7 @@
 
 @section('body')
 @php
-$specialist = \App\Models\TrainerSpecialis::get();
+$specialist = \App\Models\TrainerSpecialis::whereUser_id(auth()->id())->get();
 @endphp
 <div class="card">
   <div class="card-body">
