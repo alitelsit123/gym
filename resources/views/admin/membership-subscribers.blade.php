@@ -37,7 +37,7 @@ $memberships = \App\Models\Membership::has('type')->whereMembership_type_id(requ
           <td>
             @php
             $duration = null;
-            if ($row->durationTypeLocal() == 'harian') {
+            if ($row->durationTypeLocal() == 'hari') {
               $duration = \Carbon\Carbon::parse($row->start_date)->addDays($row->duration);
             } else if($row->durationTypeLocal() == 'minggu') {
               $duration = \Carbon\Carbon::parse($row->start_date)->addWeeks($row->duration);
