@@ -38,6 +38,21 @@ $productsCount = \App\Models\Product::get()->count();
                 <h4 class="mb-0">Keranjang</h4>
 
               </div>
+                @php
+                $order = \App\Models\Order::whereStatus('cart')->whereUser_id(auth()->id())->first();
+                @endphp
+                @php
+                $cantCheckout = false;
+                $cantCheckoutIds = [];
+                if ($order) {
+                  foreach ($order->details as $rowDetail) {
+                    if ($rowDetail->product->stock < $rowDetail->quantity) {
+                      $cantCheckout = true;
+                      $cantCheckoutIds[] = $rowDetail->id;
+                    }
+                  }
+                }
+                @endphp
 
                 <div class="card-body w-100">
                   <div class="table-responsive table-card">
@@ -46,15 +61,11 @@ $productsCount = \App\Models\Product::get()->count();
                     </form>
                   </div>
                 </div>
-
-                @php
-                $order = \App\Models\Order::whereStatus('cart')->whereUser_id(auth()->id())->first();
-                @endphp
                 @if ($order)
                 <div class="card-footer justify-content-between d-flex">
                   <button type="submit" class="btn btn-outline-primary btn-update">Update</button>
                   {{-- <a href="{{url('trainer/product/pay')}}" class="btn btn-primary">Bayar</a> --}}
-                  <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-2">Bayar</button>
+                  <button type="button" class="btn btn-sm btn-primary" @if(!$cantCheckout) data-bs-toggle="modal" data-bs-target="#exampleModal-2" @else disabled @endif>Bayar</button>
                   <!-- Modal -->
                   <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

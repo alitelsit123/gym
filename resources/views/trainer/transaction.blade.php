@@ -43,7 +43,7 @@
             @elseif ($row->payment_type == 'transfer')
             <a href="{{url('trainer/approved_payment_packet?id='.$row->id)}}" onclick="return confirm('Approve Transaksi ?')" class="btn btn-sm btn-success" style="display: block;">Approve</a>
             @else
-            <button type="button" class="btn btn-sm btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}">Bayar Tunai</button>
+            <button type="button" class="btn btn-sm btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$row->id}}">Verifikasi Pembayaran</button>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

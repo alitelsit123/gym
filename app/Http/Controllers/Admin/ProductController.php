@@ -18,6 +18,7 @@ class ProductController extends Controller
     $validatedData = $request->validate([
           'name' => 'required',
           'price' => 'required',
+          'stock' => 'required',
           'category' => 'required',
       ]);
       $existingPacket = Product::whereName($request->name)->first();
@@ -27,6 +28,7 @@ class ProductController extends Controller
           'name' => $request->name,
           'category' => $request->category,
           'price' => $request->price,
+          'stock' => $request->stock,
           'description' => $request->description,
           'status' => 'tersedia',
         ]);
@@ -34,6 +36,12 @@ class ProductController extends Controller
       } else {
         return redirect()->back()->with('error', 'Produk sudah ada, Hanya bisa mengupdate!');
       }
+      if ($existingPacket->stock > 0) {
+        $existingPacket->status = 'tersedia';
+      } else {
+        $existingPacket->status = 'habis';
+      }
+      $existingPacket->save();
 
       if (!empty($packet) && $request->image !== null) {
         // Validate the request
@@ -64,6 +72,7 @@ class ProductController extends Controller
           'name' => 'required',
           'category' => 'required',
           'price' => 'required',
+          'stock' => 'required',
           'status' => 'required',
       ]);
       $existingPacket = Product::findOrFail($id);
@@ -73,11 +82,18 @@ class ProductController extends Controller
           'name' => $request->name,
           'category' => $request->category,
           'price' => $request->price,
+          'stock' => $request->stock,
           'description' => $request->description,
           'status' => $request->status
         ]);
         $existingPacket->save();
       }
+      if ($existingPacket->stock > 0) {
+        $existingPacket->status = 'tersedia';
+      } else {
+        $existingPacket->status = 'habis';
+      }
+      $existingPacket->save();
 
       if (!empty($existingPacket) && $request->image !== null && $request->hasFile('image')) {
         // Validate the request
@@ -100,7 +116,7 @@ class ProductController extends Controller
         $existingPacket->save();
       }
 
-      return redirect()->back()->with('success', 'Berhasil update paket.');
+      return redirect()->back()->with('success', 'Berhasil update produck.');
   }
   public function destroy()
   {

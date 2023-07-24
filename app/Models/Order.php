@@ -17,4 +17,16 @@ class Order extends Model
     public function user() {
       return $this->belongsTo('App\Models\User', 'user_id');
     }
+    public function decrementProduct() {
+      foreach ($this->details()->has('product')->get() as $row) {
+        $product = $row->product;
+        $product->stock = $product->stock-$row->quantity;
+        if ($product->stock > 0) {
+          $product->status = 'tersedia';
+        } else {
+          $product->status = 'habis';
+        }
+        $product->save();
+      }
+    }
 }

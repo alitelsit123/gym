@@ -37,6 +37,10 @@ $products = \App\Models\Product::get();
                       <input type="file" id="" name="image" class="form-control" accept="image/*" placeholder="Nama Paket">
                     </div>
                     <div class="form-group mb-3">
+                      <label class="form-label" for="">Stok</label>
+                      <input type="number" id="" name="stock" class="form-control" placeholder="Stok" />
+                    </div>
+                    <div class="form-group mb-3">
                       <label class="form-label" for="">Keterangan</label>
                       <textarea name="description" id="" rows="3" class="form-control w-100"></textarea>
                     </div>
@@ -61,6 +65,7 @@ $products = \App\Models\Product::get();
             <th scope="col">Produk</th>
             <th scope="col">Harga</th>
             <th scope="col">Gambar</th>
+            <th scope="col">Stok</th>
             <th scope="col">Keterangan</th>
             <th scope="col">Status</th>
             <th scope="col">#</th>
@@ -76,6 +81,7 @@ $products = \App\Models\Product::get();
           <td>
             <img src="{{asset('storage/product/'.$row->image)}}" alt="" srcset="" style="width:70px;height:auto;" />
           </td>
+          <td>{{$row->stock}}</td>
           <td>{{$row->description}}</td>
           <td>{{$row->status}}</td>
           <td>
@@ -107,6 +113,10 @@ $products = \App\Models\Product::get();
                             <label class="form-label" for="">Gambar</label>
                             <input type="file" id="" name="image" class="form-control" accept="image/*" placeholder="">
                             <small>Kosongkan jika tidak update gambar.</small>
+                          </div>
+                          <div class="form-group mb-3">
+                            <label class="form-label" for="">Stok</label>
+                            <input type="number" id="" name="stock" value="{{$row->stock}}" class="form-control" placeholder="Stok" />
                           </div>
                           <div class="form-group mb-3">
                             <label class="form-label" for="">Keterangan</label>

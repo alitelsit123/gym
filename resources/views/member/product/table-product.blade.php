@@ -61,7 +61,9 @@ $order = \App\Models\Order::whereStatus('cart')->whereUser_id(auth()->id())->fir
             <td><strong>{{$row->name}}</strong></td>
             <td>Rp. {{number_format($row->price)}}</td>
             <td>
-              @if (!$order || ($order && $order->details()->whereProduct_id($row->id)->first() === null))
+              @if($row->stock == 0)
+              <strong>Habis</strong>
+              @elseif (!$order || ($order && $order->details()->whereProduct_id($row->id)->first() === null))
               <form action="{{url('member/product/add_cart/'.$row->id)}}" method="post">
                 <button type="submit" href="" class="btn btn-primary btn-sm">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="" style="width: 18px;height:18px;">

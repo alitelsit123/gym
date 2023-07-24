@@ -17,4 +17,16 @@ class TransactionOther extends Model
     public function details() {
       return $this->hasMany('App\Models\TransactionOtherDetail', 'order_id');
     }
+    public function decrementProduct() {
+      foreach ($this->details()->has('product')->get() as $row) {
+        $product = $row->product;
+        $product->stock = $product->stock-$row->quantity;
+        if ($product->stock > 0) {
+          $product->status = 'tersedia';
+        } else {
+          $product->status = 'habis';
+        }
+        $product->save();
+      }
+    }
 }

@@ -56,8 +56,10 @@ class TransactionController extends Controller
       $membership->payment_total = request('payment_total');
       $membership->payment_changes = request('payment_changes');
       $membership->save();
+      $membership->decrementProduct();
       return $this->invoice($membership,'Order')->with(['success' => 'Transaksi telah diterima.']);
     }
+    $membership->decrementProduct();
     $membership->user->notify(new \App\Notifications\ProductNotification(['model' => 'Order', 'target' => $membership],'Transaksi produk #'.$membership->id.' sudah diverifikasi'));
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }
@@ -119,8 +121,10 @@ class TransactionController extends Controller
       $membership->gross_amount = request('payment_total');
       $membership->payment_changes = request('payment_changes');
       $membership->save();
+      $membership->decrementProduct();
       return $this->invoiceOther($membership,$membership->type)->with(['success' => 'Transaksi telah diterima.']);
     }
+    $membership->decrementProduct();
     // $membership->user->notify(new \App\Notifications\ProductNotification(['model' => 'Membership', 'target' => $membership],'Transaksi #'.$membership->id.' sudah diverifikasi anda telah berlangganan '.$membership->type->name));
     return back()->with(['success' => 'Transaksi telah diterima.']);
   }

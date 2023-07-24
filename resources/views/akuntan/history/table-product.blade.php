@@ -74,7 +74,7 @@ $order = \App\Models\Order::where('status', 'pending')->get();
           @if ($row->payment_type == 'transfer')
           <a href="{{url('akuntan/approved_payment_product?id='.$row->id)}}" onclick="return confirm('Approve Transaksi ?')" class="btn btn-sm btn-success">Approve</a>
           @else
-          <button type="button" class="btn btn-sm btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModals-{{$row->id}}">Bayar sekarang</button>
+          <button type="button" class="btn btn-sm btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModals-{{$row->id}}">Verifikasi Pembayaran</button>
           <!-- Modal -->
           <div class="modal fade" id="exampleModals-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
