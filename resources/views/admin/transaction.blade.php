@@ -78,7 +78,7 @@ if (request('range')) {
     </div>
     <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">Produk</a>
+        <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">Semua</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="member-tab" data-bs-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="true">Produk</a>
