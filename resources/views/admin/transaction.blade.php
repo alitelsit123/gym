@@ -36,6 +36,7 @@ if (request('range')) {
   <div class="card-body">
     <div class="d-flex align-items-center justify-content-between">
       <h4>Transaksi</h4>
+
     </div>
     <hr />
     <div>
@@ -44,6 +45,14 @@ if (request('range')) {
         <input type="text" name="range" id="" class="form-control range" readonly>
         <a  href="{{url()->current()}}" class="btn btn-sm btn-danger mt-2">Reset</a>
         <button type="submit" class="btn btn-sm btn-primary mt-2">Filter</button>
+        <button type="button" class="btn btn-success btn-sm btn-print-all mt-2">Print Laporan</button>
+        <script>
+          $(document).ready(function() {
+            $('.btn-print-all').click(function() {
+              window.open("{{url('report-all')}}?range="+$('input[name="range"]').val());
+            })
+          })
+        </script>
       </form>
       <script>
         $(document).ready(function () {

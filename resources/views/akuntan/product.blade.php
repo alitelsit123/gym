@@ -62,6 +62,7 @@ $products = \App\Models\Product::get();
     <table class="table table-stripped mt-2">
       <thead>
         <tr>
+            <th>Kode</th>
             <th scope="col">Produk</th>
             <th scope="col">Harga</th>
             <th scope="col">Gambar</th>
@@ -74,6 +75,7 @@ $products = \App\Models\Product::get();
       <tbody>
         @foreach ($products as $k => $row)
         <tr>
+          <td>{{'P-'.strtoupper(Str::limit($row->name,2,'')).'0'.$row->id}}</td>
           <td>
             <div>{{$row->name}}<br /><div class="badge bg-info">{{$row->category}}</div></div>
           </td>

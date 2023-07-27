@@ -266,6 +266,9 @@ Route::prefix('member')->middleware('auth.role')->group(function() {
 
 Route::post('send_chat',[App\Http\Controllers\ChatController::class, 'send']);
 Route::get('destroy_chat/{id}',[App\Http\Controllers\ChatController::class, 'destroy']);
+Route::get('report-all', function() {
+  return view('report');
+});
 
 Route::prefix('user')->group(function() {
   Route::get('/',[App\Http\Controllers\UserController::class, 'index']);

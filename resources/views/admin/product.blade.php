@@ -75,7 +75,7 @@ $products = \App\Models\Product::get();
       <tbody>
         @foreach ($products as $k => $row)
         <tr>
-          <td>{{$row->id}}</td>
+          <td>{{'P-'.strtoupper(Str::limit($row->name,2,'')).'0'.$row->id}}</td>
           <td>
             <div>{{$row->name}}<br /><div class="badge bg-info">{{$row->category}}</div></div>
           </td>
