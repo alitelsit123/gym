@@ -28,11 +28,12 @@ class ProductController extends Controller
           'name' => $request->name,
           'category' => $request->category,
           'price' => $request->price,
-          'stock' => $request->stock,
+          'stock' => $request->stock ?? 10,
           'description' => $request->description,
           'status' => 'tersedia',
         ]);
         $packet->save();
+        $existingPacket = $packet;
       } else {
         return redirect()->back()->with('error', 'Produk sudah ada, Hanya bisa mengupdate!');
       }
