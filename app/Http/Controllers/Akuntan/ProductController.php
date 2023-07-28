@@ -33,6 +33,8 @@ class ProductController extends Controller
           'status' => 'tersedia',
         ]);
         $packet->save();
+        $existingPacket = $packet;
+
       } else {
         return redirect()->back()->with('error', 'Produk sudah ada, Hanya bisa mengupdate!');
       }
